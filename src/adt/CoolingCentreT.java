@@ -14,5 +14,9 @@ public class CoolingCentreT extends LocationT {
 		super(name, address);
 		this.type = type;
 	}
+	
+	public CentreT getType() {
+		return this.type;
+	}
 
 }
