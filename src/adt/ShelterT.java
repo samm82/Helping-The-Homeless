@@ -2,14 +2,10 @@ package adt;
 
 public class ShelterT extends LocationT {
 	
-	private enum shelterResT {
-		MALE,
-		FEMALE,
-		COED,
-		FAMILY,
-		YOUTH
+	public enum shelterResT {
+		MALE, FEMALE, COED, FAMILY, YOUTH;
 	}
-		
+	
 	private shelterResT type;
 	private String name, address;
 	private int[] occupancy2018, capacity2018, occupancy2017, capacity2017;
