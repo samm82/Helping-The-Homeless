@@ -38,6 +38,26 @@ public class ShelterT extends LocationT {
 		N++;
 	}
 	
+	public shelterResT getType() {
+		return this.type;
+	}
+	
+	public int[] getOccupancy2018() {
+		return this.occupancy2018;
+	}
+	
+	public int[] getOccupancy2017() {
+		return this.occupancy2017;
+	}
+	
+	public int[] getCapacity2018() {
+		return this.capacity2018;
+	}
+	
+	public int[] getCapacity2017() {
+		return this.capacity2017;
+	}
+	
 //  May not be used due to changing the implementation of user type	
 //	public boolean isValidType(UserT user) {
 //		GenderT gen  = user.getGender();
