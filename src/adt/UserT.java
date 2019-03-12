@@ -2,19 +2,17 @@ package adt;
 
 public class UserT {
 	
-	public enum GenderT {
-		MALE,
-		FEMALE
+	public enum UserResT {
+		MALE_ONLY,
+		MALE_COED,
+		FEMALE_ONLY,
+		FEMALE_COED,
+		FAMILY,
+		YOUTH
 	}
 	
-	private GenderT gender;
-	private boolean flexible; // OK with being with other gender
-	private boolean family;   // If a family
-	private boolean youth;    // If a youth
+	private UserResT resType;
 	
-	public GenderT getGender()  { return gender;   }
-	public boolean isFlexible() { return flexible; }
-	public boolean isFamily()   { return family;   }
-	public boolean isYouth()    { return youth;    }
+	public UserResT getResType() { return resType; }
 	
 }
