@@ -27,22 +27,16 @@ public class ShelterT extends LocationT {
 		N = 0;
 	}
 	
-	public void setOccupancy(int occupancy, int year) {
+	public void setCapOcc(int occupancy, int capacity, int year) {
 		if(year == 2018) {
 			this.occupancy2018[N] = occupancy;
-		}
-		if(year == 2017) {
-			this.occupancy2017[N] = occupancy;
-		}
-	}
-	
-	public void setCapacity(int capacity, int year) {
-		if(year == 2018) {
 			this.capacity2018[N] = capacity;
 		}
 		if(year == 2017) {
+			this.occupancy2017[N] = occupancy;
 			this.capacity2017[N] = capacity;
 		}
+		N++;
 	}
 	
 //  May not be used due to changing the implementation of user type	
