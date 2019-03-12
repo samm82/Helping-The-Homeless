@@ -19,6 +19,7 @@ representations.
 
 |Command|Function|
 |---|---|
-|`git push origin <test>`|Pushes to `test`|
-|`git pull origin <test>`|Pulls from `test`|
+|`git push origin test`|Pushes to `test`|
+|`git pull origin test`|Pulls from `test`|
 |`git merge master`|Merges changes in `master` to `test` <br /> (Make sure you pull on `master` first and do this regularly)|
+|`git checkout master`|Moves to `master`|
