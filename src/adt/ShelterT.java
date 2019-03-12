@@ -4,7 +4,7 @@ import adt.UserT.GenderT;
 
 public class ShelterT extends LocationT {
 	
-	enum ResidentT {
+	private enum ResidentT {
 		MALE,
 		FEMALE,
 		COED,
@@ -16,12 +16,14 @@ public class ShelterT extends LocationT {
 	
 	public boolean isValidType(UserT user) {
 		GenderT gen  = user.getGender();
-		boolean flex = user.getFlexibility();
 		
-		if (flex                  && type == ResidentT.COED  ) return true;
-		if (gen == GenderT.MALE   && type == ResidentT.MALE  ) return true;
-		if (gen == GenderT.FEMALE && type == ResidentT.FEMALE) return true;
-		else                                                   return false;
+		if (user.isFamily()) return (type == ResidentT.FAMILY);
+		if (user.isYouth())  return (type == ResidentT.YOUTH);
+		
+		if      (user.isFlexible()     && type == ResidentT.COED  ) return true;
+		else if (gen == GenderT.MALE   && type == ResidentT.MALE  ) return true;
+		else if (gen == GenderT.FEMALE && type == ResidentT.FEMALE) return true;
+		else                                                        return false;
 		
 	}
 
