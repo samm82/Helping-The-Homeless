@@ -13,6 +13,16 @@ public class ShelterT extends LocationT {
 	}
 	
 	private ResidentT type;
+	private String name, address;
+	private int occupancy, capacity;
+	
+	public ShelterT(ResidentT type, String name, String address, int occupancy, int capacity) {
+		super(name, address);
+		this.type = type;
+		this.occupancy = occupancy;
+		this.capacity = capacity;
+	}
+	
 	
 	public boolean isValidType(UserT user) {
 		GenderT gen  = user.getGender();
