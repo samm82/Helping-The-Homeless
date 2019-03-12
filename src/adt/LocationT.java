@@ -1,6 +1,6 @@
 package adt;
 
-public class LocationT {
+public class LocationT implements Comparable<LocationT>{
 	
 	private String name, address;
 	private float score;
@@ -25,5 +25,12 @@ public class LocationT {
 	public void setScore(float nScore) {
 		this.score = nScore;
 	}
+	
+	@Override
+    public int compareTo(LocationT that){
+        if      (score < that.getScore()) return -1;
+        else if (score > that.getScore()) return 1;
+        else                              return 0;
+    }
 	
 }
