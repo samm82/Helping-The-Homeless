@@ -1,3 +1,4 @@
+package GUI;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -14,7 +15,7 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Slider;
 import org.eclipse.swt.widgets.Text;
 
-public class ListOfShelters {
+public class GUI {
 
 	protected Shell shell;
 	private Text text;
@@ -25,7 +26,7 @@ public class ListOfShelters {
 	 */
 	public static void main(String[] args) {
 		try {
-			ListOfShelters window = new ListOfShelters();
+			GUI window = new GUI();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
