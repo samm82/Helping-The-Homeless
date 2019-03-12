@@ -1,13 +1,21 @@
 package adt;
 
 public class ShelterT extends LocationT {
+	
+	private enum shelterResT {
+		MALE,
+		FEMALE,
+		COED,
+		FAMILY,
+		YOUTH
+	}
 		
-	private ResidentT type;
+	private shelterResT type;
 	private String name, address;
 	private int[] occupancy2018, capacity2018, occupancy2017, capacity2017;
 	private int N;
 	
-	public ShelterT(ResidentT type, String name, String address) {
+	public ShelterT(shelterResT type, String name, String address) {
 		super(name, address);
 		this.type = type;
 		

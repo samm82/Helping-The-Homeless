@@ -2,8 +2,17 @@ package adt;
 
 public class UserT {
 	
-	private ResidentT resType;
+	public enum UserResT {
+		MALE_ONLY,
+		MALE_COED,
+		FEMALE_ONLY,
+		FEMALE_COED,
+		FAMILY,
+		YOUTH
+	}
 	
-	public ResidentT getResType() { return resType; }
+	private UserResT resType;
+	
+	public UserResT getResType() { return resType; }
 	
 }
