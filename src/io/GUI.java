@@ -1,19 +1,24 @@
 package io;
 
-import org.eclipse.swt.SWT;
-
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import java.util.ArrayList;
+
+import javax.swing.JScrollPane;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.ScrollBar;
+import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.widgets.Slider;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Group;
 
 public class GUI {
 
@@ -119,7 +124,12 @@ public class GUI {
 		btnFindShelter.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				btnFamily.equals(btnFamily);
+				for (int i = 1; i < 100; i++) {
+					int strnum = (int) (Math.sqrt(i*16)+Math.sqrt(i)+3*i);
+					float dist = (float) (i*1.25/3.5);
+					//Name, address, dist, type, 
+					text.append("Shelter " + i + "\t\t\t\t\t" + dist + "km" + "\n" + strnum + " Fake St W\n\n");
+				}
 			}
 		});
 		btnFindShelter.setBounds(10, 153, 630, 30);
