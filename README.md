@@ -15,6 +15,7 @@ representations.
 |`git checkout -b <branch>`|Creates new `<branch>` and moves unstaged changes to it|
 |`git checkout <branch>`|Moves to existing `<branch>`|
 |`git remote prune origin`|"Prunes" local branches that don't exist on the remote repo (ie. that have been moved)|
+|`git branch -d <branch>`|Removes local branch (use only after <branch> has been merged and pruned)|
 
 ### On branch called `test`
 
