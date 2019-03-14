@@ -2,11 +2,15 @@ package io;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class GUI {
 
 	protected Shell shell;
+	private Text text;
 
 	/**
 	 * Launch the application.
@@ -41,9 +45,32 @@ public class GUI {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(450, 300);
-		shell.setText("SWT Application");
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shell.setSize(668, 478);
+		shell.setText("Best Shelter");
+		shell.scroll(0, 0, 0, 0, 5, 5, true);
+		shell.setLayout(null);
+
+		Label lblHereAreYour = new Label(shell, SWT.NONE);
+		lblHereAreYour.setBounds(10, 10, 630, 60);
+		lblHereAreYour.setFont(SWTResourceManager.getFont("Times New Roman", 14, SWT.BOLD));
+		lblHereAreYour.setAlignment(SWT.CENTER);
+		lblHereAreYour.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblHereAreYour.setText("Here are your best shelters");
+
+		text = new Text(shell, SWT.READ_ONLY | SWT.V_SCROLL);
+		text.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		text.setBounds(10, 76, 630, 345);
+
+
+		for (int i = 1; i < 100; i++) {
+			int strnum = (int) (Math.sqrt(i*16)+Math.sqrt(i)+3*i);
+			float dist = (float) (i*1.25/3.5);
+			text.append("Shelter " + i + "\t\t\t\t\t" + dist + "km" + "\n" + strnum + " Fake St W\n\n");
+		}
+
+
+
 
 	}
-
 }
