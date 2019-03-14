@@ -176,7 +176,7 @@ public class MaxPQ<Key> implements Iterable<Key> {
      ***************************************************************************/
 
      /**
-      * Returns an iterator that iterhttps://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/MaxPQ.java.htmlates over the keys on this priority queue
+      * Returns an iterator that iterates over the keys on this priority queue
       * in descending order.
       * The iterator doesn't implement {@code remove()} since it's optional.
       *
