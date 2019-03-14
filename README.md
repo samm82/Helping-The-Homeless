@@ -12,8 +12,9 @@ representations.
 
 |Command|Function|
 |---|---|
-|`git checkout -b <branch>`|Creates new `<branch>` and moves unstages changes to it|
+|`git checkout -b <branch>`|Creates new `<branch>` and moves unstaged changes to it|
 |`git checkout <branch>`|Moves to existing `<branch>`|
+|`git remote prune origin`|"Prunes" local branches that don't exist on the remote repo (ie. that have been moved)|
 
 ### On branch called `test`
 
