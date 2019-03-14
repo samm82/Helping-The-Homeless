@@ -7,7 +7,6 @@ public class ShelterT extends LocationT {
 	}
 	
 	private shelterResT type;
-	private String name, address;
 	private int[] occupancy2018, capacity2018, occupancy2017, capacity2017;
 	private int N;
 	

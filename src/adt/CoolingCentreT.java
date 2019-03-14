@@ -7,7 +7,6 @@ public class CoolingCentreT extends LocationT {
 		COMM_CNTR
 	}
 	
-	private String name, address;
 	private CentreT type;
 	
 	public CoolingCentreT(CentreT type, String name, String address) {
