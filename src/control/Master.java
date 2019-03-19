@@ -17,14 +17,14 @@ public class Master {
 		ArrayList<ShelterT> family = new ArrayList<>();
 		ArrayList<ShelterT> youth  = new ArrayList<>();
 		
-		ShelterT alpha   = new ShelterT(shelterResT.MALE,   "Alpha Shelter",   "123 Test Avenue",   43.653224, -79.383236);
-		ShelterT beta    = new ShelterT(shelterResT.FEMALE, "Beta Shelter",    "234 Fake Street",   43.846996, -79.179432);
-		ShelterT gamma   = new ShelterT(shelterResT.MALE,   "Gamma Shelter",   "123 Test Cresent",  43.747874, -79.633992);
-		ShelterT delta   = new ShelterT(shelterResT.YOUTH,  "Delta Shelter",   "420 Blaze Drive",   43.235242, -79.982736);
-		ShelterT epsilon = new ShelterT(shelterResT.COED,   "Epsilon Shelter", "314 Nerd Street",   43.874298, -79.379202);
-		ShelterT zeta    = new ShelterT(shelterResT.FAMILY, "Zeta Shelter",    "270 Time Street",   43.723905, -79.298421);
-		ShelterT eta     = new ShelterT(shelterResT.YOUTH,  "Eta Shelter",     "357 Hassan Street", 43.357357, -79.357357);
-		ShelterT theta   = new ShelterT(shelterResT.MALE,   "Theta Shelter",   "314 Jason Street",  43.123479, -79.239472);
+		ShelterT alpha   = new ShelterT(shelterResT.MALE,   "Alpha Shelter",   "123 Test Avenue");
+		ShelterT beta    = new ShelterT(shelterResT.FEMALE, "Beta Shelter",    "234 Fake Street");
+		ShelterT gamma   = new ShelterT(shelterResT.MALE,   "Gamma Shelter",   "123 Test Cresent");
+		ShelterT delta   = new ShelterT(shelterResT.YOUTH,  "Delta Shelter",   "420 Blaze Drive");
+		ShelterT epsilon = new ShelterT(shelterResT.COED,   "Epsilon Shelter", "314 Nerd Street");
+		ShelterT zeta    = new ShelterT(shelterResT.FAMILY, "Zeta Shelter",    "270 Time Street");
+		ShelterT eta     = new ShelterT(shelterResT.YOUTH,  "Eta Shelter",     "357 Hassan Street");
+		ShelterT theta   = new ShelterT(shelterResT.MALE,   "Theta Shelter",   "314 Jason Street");
 		
 		alpha.setScore(0.24);
 		beta.setScore(0.49);
