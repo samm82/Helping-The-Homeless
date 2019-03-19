@@ -2,6 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
+import algsstructs.*;
+
 import adt.ShelterT;
 import adt.ShelterT.shelterResT;
 
@@ -9,11 +11,11 @@ import adt.ShelterT.shelterResT;
 public class Master {
 	
 	public static void main(String args[]) {
-		ArrayList<ShelterT> male   = new ArrayList<ShelterT>();
-		ArrayList<ShelterT> female = new ArrayList<ShelterT>();
-		ArrayList<ShelterT> coed   = new ArrayList<ShelterT>();
-		ArrayList<ShelterT> family = new ArrayList<ShelterT>();
-		ArrayList<ShelterT> youth  = new ArrayList<ShelterT>();
+		ArrayList<ShelterT> male   = new ArrayList<>();
+		ArrayList<ShelterT> female = new ArrayList<>();
+		ArrayList<ShelterT> coed   = new ArrayList<>();
+		ArrayList<ShelterT> family = new ArrayList<>();
+		ArrayList<ShelterT> youth  = new ArrayList<>();
 		
 		ShelterT alpha   = new ShelterT(shelterResT.MALE,   "Alpha Shelter",   "123 Test Avenue",   43.653224, -79.383236);
 		ShelterT beta    = new ShelterT(shelterResT.FEMALE, "Beta Shelter",    "234 Fake Street",   43.846996, -79.179432);
@@ -42,13 +44,13 @@ public class Master {
 		youth.add(eta);
 		male.add(theta);
 		
-		Object[] maleArray = male.toArray();
-		Object[] femaleArray = female.toArray();
-		Object[] coedArray = coed.toArray();
-		Object[] familyArray = family.toArray();
-		Object[] youthArray = youth.toArray();
+		ShelterT[] maleArray   = male.toArray(new ShelterT[male.size()]);
+		ShelterT[] femaleArray = female.toArray(new ShelterT[female.size()]);
+		ShelterT[] coedArray   = coed.toArray(new ShelterT[coed.size()]);
+		ShelterT[] familyArray = family.toArray(new ShelterT[family.size()]);
+		ShelterT[] youthArray  = youth.toArray(new ShelterT[youth.size()]);
 		
-		Object[][] masterArray = { maleArray, femaleArray, coedArray, familyArray, youthArray };
+		ShelterT[][] masterArray = { maleArray, femaleArray, coedArray, familyArray, youthArray };
 		
 	}
 
