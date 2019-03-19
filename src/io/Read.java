@@ -13,7 +13,7 @@ public class Read {
 		ArrayList<ShelterT> youthArray = new ArrayList<ShelterT>();
 		ShelterT[] var = new ShelterT[1];
 		
-		maleArray.add(new ShelterT( ShelterT.shelterResT.MALE, "Test", "123 Fun Street"));
+		maleArray.add(new ShelterT( ShelterT.shelterResT.MALE, "Test", "123 Fun Street", 43.234786, -79.123983));
 		
 		
 		ShelterT[][] temp = new ShelterT[5][100];
