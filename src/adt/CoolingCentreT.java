@@ -9,8 +9,8 @@ public class CoolingCentreT extends LocationT {
 	
 	private CentreT type;
 	
-	public CoolingCentreT(CentreT type, String name, String address) {
-		super(name, address);
+	public CoolingCentreT(CentreT type, String name, String address, double lat, double lon) {
+		super(name, address, lat, lon);
 		this.type = type;
 	}
 	

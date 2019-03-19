@@ -3,11 +3,13 @@ package adt;
 public class LocationT implements Comparable<LocationT>{
 	
 	private String name, address;
-	private float score;
+	private double lat, lon, score;
 	
-	public LocationT(String name, String address) {
-		this.name = name;
+	public LocationT(String name, String address, double lat, double lon) {
+		this.name    = name;
 		this.address = address;
+		this.lat     = lat;
+		this.lon     = lon;
 	}
 	
 	public String getName() {
@@ -18,11 +20,19 @@ public class LocationT implements Comparable<LocationT>{
 		return this.address;
 	}
 	
-	public float getScore() {
+	public double getScore() {
 		return this.score;
 	}
 	
-	public void setScore(float nScore) {
+	public double getLatitude() {
+		return this.lat;
+	}
+	
+	public double getLongtitude() {
+		return this.lon;
+	}
+	
+	public void setScore(double nScore) {
 		this.score = nScore;
 	}
 	
