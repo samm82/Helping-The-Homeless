@@ -54,17 +54,15 @@ public class ShelterT extends LocationT {
 	}
 	
 //  May not be used due to changing the implementation of user type	
-//	public boolean isValidType(UserT user) {
-//		GenderT gen  = user.getGender();
-//		
-//		if (user.isFamily()) return (type == ResidentT.FAMILY);
-//		if (user.isYouth())  return (type == ResidentT.YOUTH);
-//		
-//		if      (user.isFlexible()     && type == ResidentT.COED  ) return true;
-//		else if (gen == GenderT.MALE   && type == ResidentT.MALE  ) return true;
-//		else if (gen == GenderT.FEMALE && type == ResidentT.FEMALE) return true;
-//		else                                                        return false;
-//		
-//	}
+	public boolean isValidType(UserT user) {	
+		if (user.isFamily()) return (type == shelterResT.FAMILY);
+		if (user.isYouth())  return (type == shelterResT.YOUTH);
+		
+		if      (user.isFlexible() && type == shelterResT.COED  ) return true;
+		else if (user.isMale()     && type == shelterResT.MALE  ) return true;
+		else if (user.isFemale()   && type == shelterResT.FEMALE) return true;
+		else                                                      return false;
+		
+	}
 
 }
