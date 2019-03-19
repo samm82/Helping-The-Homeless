@@ -41,6 +41,15 @@ public class LocationT implements Comparable<LocationT>{
 		this.score = nScore;
 	}
 	
+	public void setLon(double lon) {
+		this.lon = lon;
+	}
+	
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+	
+	
 	@Override
     public int compareTo(LocationT that){
         if      (score < that.getScore()) return -1;

@@ -2,7 +2,7 @@ package adt;
 
 public class CoolingCentreT extends LocationT {
 	
-	private enum CentreT { // might not end up using
+	public enum CentreT { // might not end up using
 		LIBRARY,
 		COMM_CNTR
 	}
