@@ -4,7 +4,7 @@
  * https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/DepthFirstSearch.java.html
  */
 
-package process;
+package algsstructs;
 
 public class DepthFirstSearch {
     private boolean[] marked;    // marked[v] = is there an s-v path?

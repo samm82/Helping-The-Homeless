@@ -4,7 +4,7 @@
  * https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/Graph.java.html
  */
 
-package process;
+package algsstructs;
 
 import java.util.NoSuchElementException;
 
