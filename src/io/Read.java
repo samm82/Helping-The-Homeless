@@ -18,17 +18,18 @@ public class Read {
 		ArrayList<ShelterT> youthArray = new ArrayList<ShelterT>();
 		ShelterT[] var = new ShelterT[1];
 		
-		JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader("data/SMIS_Daily_Occupancy_2018.json"));
-            JSONArray jsonObject = (JSONArray) obj;
-            JSONObject arr = (JSONObject) jsonObject.get(0);
-            String arguments = (String) arr.get("SHELTER_NAME");
-            System.out.println(arguments);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		//maleArray.add(new ShelterT( ShelterT.shelterResT.MALE, "Test", "123 Fun Street", 43.234786, -79.123983));
+//		JSONParser parser = new JSONParser();
+//        try {
+//            Object obj = parser.parse(new FileReader("data/SMIS_Daily_Occupancy_2018.json"));
+//            JSONArray jsonObject = (JSONArray) obj;
+//            JSONObject arr = (JSONObject) jsonObject.get(0);
+//            String arguments = (String) arr.get("SHELTER_NAME");
+//            System.out.println(arguments);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 		
 		
 		ShelterT[][] temp = new ShelterT[5][100];
