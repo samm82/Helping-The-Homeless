@@ -4,7 +4,7 @@
  * https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/MaxPQ.java.html
  */
 
-package control;
+package process;
 
 import java.util.Comparator;
 import java.util.Iterator;
