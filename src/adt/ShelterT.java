@@ -10,8 +10,8 @@ public class ShelterT extends LocationT {
 	private int[] occupancy2018, capacity2018, occupancy2017, capacity2017;
 	private int N;
 	
-	public ShelterT(shelterResT type, String name, String address, double lat, double lon) {
-		super(name, address, lat, lon);
+	public ShelterT(shelterResT type, String name, String address) {
+		super(name, address);
 		this.type = type;
 		
 		occupancy2018 = new int[365];

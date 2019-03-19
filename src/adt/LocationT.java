@@ -5,6 +5,11 @@ public class LocationT implements Comparable<LocationT>{
 	private String name, address;
 	private double lat, lon, score;
 	
+	public LocationT(String name, String address) {
+		this.name    = name;
+		this.address = address;
+	}
+	
 	public LocationT(String name, String address, double lat, double lon) {
 		this.name    = name;
 		this.address = address;
