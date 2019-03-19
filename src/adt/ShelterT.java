@@ -7,12 +7,16 @@ public class ShelterT extends LocationT {
 	}
 	
 	private shelterResT type;
+	private String orgName, progName;
 	private int[] occupancy2018, capacity2018, occupancy2017, capacity2017;
 	private int N;
 	
-	public ShelterT(shelterResT type, String name, String address) {
-		super(name, address);
+	public ShelterT(shelterResT type, String orgName, String progName, String shelterName, String address) {
+		super(shelterName, address);
 		this.type = type;
+		
+		this.orgName = orgName;
+		this.progName = progName;
 		
 		occupancy2018 = new int[365];
 		capacity2018  = new int[365];
@@ -35,6 +39,14 @@ public class ShelterT extends LocationT {
 	
 	public shelterResT getType() {
 		return this.type;
+	}
+	
+	public String getOrgName() {
+		return this.orgName;
+	}
+	
+	public String getProgName() {
+		return this.progName;
 	}
 	
 	public int[] getOccupancy2018() {

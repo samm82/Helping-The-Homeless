@@ -23,6 +23,7 @@ public class Read {
 	    	for(int i = 0; i < 12; i++) {
 	    	    String line = lineScanner.nextLine();
 	    	    String[] data = line.split(",");
+	    	    String address, orgName, progName, shelterName, type;
 	    	}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
