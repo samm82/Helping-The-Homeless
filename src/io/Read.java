@@ -10,7 +10,7 @@ import adt.ShelterT.shelterResT;
 
 public class Read {
 	
-	public ShelterT[][] readShelterData() {
+	public static ShelterT[][] readShelterData() {
 		ArrayList<ShelterT> maleArray = new ArrayList<ShelterT>();
 		ArrayList<ShelterT> femaleArray = new ArrayList<ShelterT>();
 		ArrayList<ShelterT> coedArray = new ArrayList<ShelterT>();
@@ -135,7 +135,7 @@ public class Read {
 		return sheltersList;
 	}
 
-	private void addToList(ArrayList<ShelterT> arr, String[] vals, shelterResT type, int occ, int cap, int year) {
+	private static void addToList(ArrayList<ShelterT> arr, String[] vals, shelterResT type, int occ, int cap, int year) {
 		
 		for(ShelterT i : arr) {
 			if(contains(i,vals)) {
@@ -149,7 +149,7 @@ public class Read {
 		arr.get(arr.size()-1).setCapOcc(occ, cap, year);
 	}
 	
-	private boolean contains(ShelterT shelter, String[] vals) {
+	private static boolean contains(ShelterT shelter, String[] vals) {
 		//String[] vals = {orgName, shelterName, facilityName, progName, address};
 		return shelter.getOrgName().equals(vals[0]) && shelter.getName().equals(vals[1]) && shelter.getFacilityName().equals(vals[2]) 
 				&& shelter.getProgName().equals(vals[3]) && shelter.getAddress().equals(vals[4]);

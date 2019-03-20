@@ -11,8 +11,6 @@ import io.Read;
 // Control module which will control all of our functionality
 public class Master {
 	
-	static Read read = new Read();
-	
 	public static void main(String args[]) {
 //		ArrayList<ShelterT> male   = new ArrayList<>();
 //		ArrayList<ShelterT> female = new ArrayList<>();
@@ -54,7 +52,7 @@ public class Master {
 //		ShelterT[] youthArray  = youth.toArray(new ShelterT[youth.size()]);
 //		
 //		ShelterT[][] masterArray = { maleArray, femaleArray, coedArray, familyArray, youthArray };
-		ShelterT[][] masterArray = read.readShelterData();
+		ShelterT[][] masterArray = Read.readShelterData();
 		System.out.println("Done");
 		System.out.println(masterArray[1][7].getAddress());
 	}
