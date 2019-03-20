@@ -7,34 +7,37 @@ public class ShelterT extends LocationT {
 	}
 	
 	private shelterResT type;
-	private String orgName, progName;
+	private String orgName, facilityName, progName;
 	private int[] occupancy2018, capacity2018, occupancy2017, capacity2017;
-	private int N;
+	private int N, M;
 	
-	public ShelterT(shelterResT type, String orgName, String progName, String shelterName, String address) {
+	public ShelterT(shelterResT type, String orgName, String shelterName, String facilityName, String progName,  String address) {
 		super(shelterName, address);
 		this.type = type;
 		
 		this.orgName = orgName;
 		this.progName = progName;
+		this.facilityName = facilityName;
 		
-		occupancy2018 = new int[365];
-		capacity2018  = new int[365];
-		occupancy2017 = new int[365];
-		capacity2017  = new int[365];
+		this.occupancy2018 = new int[365];
+		this.capacity2018  = new int[365];
+		this.occupancy2017 = new int[365];
+		this.capacity2017  = new int[365];
 		N = 0;
+		M = 0;
 	}
 	
 	public void setCapOcc(int occupancy, int capacity, int year) {
 		if (year == 2018) {
 			this.occupancy2018[N] = occupancy;
 			this.capacity2018[N] = capacity;
+			N++;
 		}
 		if (year == 2017) {
-			this.occupancy2017[N] = occupancy;
-			this.capacity2017[N] = capacity;
+			this.occupancy2017[M] = occupancy;
+			this.capacity2017[M] = capacity;
+			M++;
 		}
-		N++;
 	}
 	
 	public shelterResT getType() {
@@ -43,6 +46,10 @@ public class ShelterT extends LocationT {
 	
 	public String getOrgName() {
 		return this.orgName;
+	}
+	
+	public String getFacilityName() {
+		return this.facilityName;
 	}
 	
 	public String getProgName() {
