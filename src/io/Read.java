@@ -25,14 +25,12 @@ public class Read {
 	    	while(lineScanner.hasNextLine()) {
 			//for (int i = 0; i < 1; i++) {
 	    	    String line = lineScanner.nextLine();
+	    	    //System.out.println(line);
 	    	    
 	    	    //Data set has commas in some of it's values but there are some empty cells represented by a space
 	    	    //So to be safe we replace ", ," (An ampty cell) with random symbols so when we remove the extra commas
 	    	    //the extra cell is not deleted (if the empty cell was deleted there would be index errors)
-	    	    line = line.replaceAll(", ,", "@@@");
 	    	    line = line.replaceAll(", ", " ");
-	    	    line = line.replaceAll("@@@", ", ,");
-	    	    
 	    	    String[] data = line.split(",");
 //	    	    for (int i = 0; i < data.length; i++) {
 //					System.out.print(data[i] + " | ");
