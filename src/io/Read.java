@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import adt.CoolingCentreT;
+import adt.CoolingCentreT.CentreT;
 import adt.ShelterT;
 import adt.ShelterT.shelterResT;
 
@@ -73,13 +75,10 @@ public class Read {
 			//for (int i = 0; i < 1; i++) {
 	    	    String line = lineScanner.nextLine();
 	    	    
-	    	    //Data set has commas in some of it's values but there are some empty cells represented by a space
-	    	    //So to be safe we replace ", ," (An ampty cell) with random symbols so when we remove the extra commas
+	    	    //Data set has commas in some of it's values but there are some empty cells which result in a ",," in the line
+	    	    //So to be safe we replace ", " with a space so when we remove the extra commas
 	    	    //the extra cell is not deleted (if the empty cell was deleted there would be index errors)
-	    	    line = line.replaceAll(", ,", "@@@");
 	    	    line = line.replaceAll(", ", " ");
-	    	    line = line.replaceAll("@@@", ", ,");
-	    	    
 	    	    String[] data = line.split(",");
 //	    	    for (int i = 0; i < data.length; i++) {
 //					System.out.print(data[i] + " | ");
@@ -151,5 +150,48 @@ public class Read {
 		//String[] vals = {orgName, shelterName, facilityName, progName, address};
 		return shelter.getOrgName().equals(vals[0]) && shelter.getName().equals(vals[1]) && shelter.getFacilityName().equals(vals[2]) 
 				&& shelter.getProgName().equals(vals[3]) && shelter.getAddress().equals(vals[4]);
+	}
+	
+	
+	public static CoolingCentreT[] readCoolingData() {
+		
+		ArrayList<CoolingCentreT> coolingArray = new ArrayList<CoolingCentreT>();
+		
+		try {
+			Scanner lineScanner = new Scanner(new File("data/SMIS_Daily_Occupancy_2018.csv"));
+			lineScanner.nextLine();
+			
+	    	while(lineScanner.hasNextLine()) {
+			//for (int i = 0; i < 1; i++) {
+	    	    String line = lineScanner.nextLine();
+	    	    
+	    	    line = line.replaceAll(", ", " ");
+	    	    
+	    	    String[] data = line.split(",");
+	    	    String type = data[2];
+	    	    String name = data[4] + " " + data[3];
+	    	    String address = data[5];
+	    	    float lat = Integer.parseInt(data[8]);
+	    	    float lon = Integer.parseInt(data[9]);
+	    	    
+	    	    switch (type) {
+				case "LIBRARY":
+		    	    coolingArray.add(new CoolingCentreT(CentreT.LIBRARY, name, address, lat, lon));
+					break;
+				case "COMM_CNTR":
+					coolingArray.add(new CoolingCentreT(CentreT.COMM_CNTR, name, address, lat, lon));
+					break;
+				}
+	    	    
+	    	}
+	    	lineScanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		CoolingCentreT[] coolList = new CoolingCentreT[coolingArray.size()];
+		coolList = coolingArray.toArray(coolList);
+		
+		return coolList;
 	}
 }
