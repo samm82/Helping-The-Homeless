@@ -3,7 +3,7 @@ package control;
 import java.util.ArrayList;
 
 import algsstructs.*;
-
+import adt.CoolingCentreT;
 import adt.ShelterT;
 import adt.ShelterT.shelterResT;
 import io.Read;
@@ -71,6 +71,7 @@ public class Master {
 		
 		System.out.println(counter);
 		
+		CoolingCentreT[] cool = Read.readCoolingData();
 		
 	}
 

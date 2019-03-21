@@ -33,6 +33,7 @@ public class Read {
 	    	    //So to be safe we replace ", ," (An ampty cell) with random symbols so when we remove the extra commas
 	    	    //the extra cell is not deleted (if the empty cell was deleted there would be index errors)
 	    	    line = line.replaceAll(", ", " ");
+//	    	    System.out.println(line);
 	    	    String[] data = line.split(",");
 //	    	    for (int i = 0; i < data.length; i++) {
 //					System.out.print(data[i] + " | ");
@@ -68,7 +69,7 @@ public class Read {
 		
 		//reads 2017 data
 		try {
-			Scanner lineScanner = new Scanner(new File("data/SMIS_Daily_Occupancy_2018.csv"));
+			Scanner lineScanner = new Scanner(new File("data/SMIS_Daily_Occupancy_2017.csv"));
 
 			lineScanner.nextLine();
 	    	while(lineScanner.hasNextLine()) {
@@ -84,7 +85,7 @@ public class Read {
 //					System.out.print(data[i] + " | ");
 //				}
 //	    	    System.out.println();
-	    	    
+//	    	    System.out.println(line);
 	    	    String  orgName = data[1], shelterName = data[2], address = data[3], facilityName = data[7], progName = data[8],  type = data[9];
 	    	    int occ = Integer.parseInt(data[10]), cap = Integer.parseInt(data[11]);
 	    	    String[] vals = {orgName, shelterName, facilityName, progName, address};
@@ -158,21 +159,24 @@ public class Read {
 		ArrayList<CoolingCentreT> coolingArray = new ArrayList<CoolingCentreT>();
 		
 		try {
-			Scanner lineScanner = new Scanner(new File("data/SMIS_Daily_Occupancy_2018.csv"));
+			Scanner lineScanner = new Scanner(new File("data/cooling_center_locations.csv"));
 			lineScanner.nextLine();
 			
 	    	while(lineScanner.hasNextLine()) {
 			//for (int i = 0; i < 1; i++) {
 	    	    String line = lineScanner.nextLine();
 	    	    
+	    	    line = line.replaceAll("\"", "");
 	    	    line = line.replaceAll(", ", " ");
 	    	    
+	    	    
+	    	    System.out.println(line);
 	    	    String[] data = line.split(",");
 	    	    String type = data[2];
 	    	    String name = data[4] + " " + data[3];
 	    	    String address = data[5];
-	    	    float lat = Integer.parseInt(data[8]);
-	    	    float lon = Integer.parseInt(data[9]);
+	    	    double lat = Double.parseDouble(data[8]);
+	    	    double lon = Double.parseDouble(data[9]);
 	    	    
 	    	    switch (type) {
 				case "LIBRARY":
