@@ -11,6 +11,13 @@ public class Weight {
 		return (int) (cap17 * 0.3 + cap18 * 0.7);
 	}
 	
+	public static double calcDist(ShelterT loc, UserT user) {
+		double latDiff = (loc.getLat() - user.getLat());
+		double lonDiff = (loc.getLon() - user.getLon());
+		double dist    = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lonDiff, 2));
+		return dist;
+	}
+	
 	public static double weightDist(double dist) {
 		if      (dist < 0.0)  throw new IllegalArgumentException("Distance must be positive");
 		else if (dist < 0.5)  return 1.0;
@@ -29,6 +36,6 @@ public class Weight {
 	// Work in progress
 	public static double calcScore(ShelterT loc, UserT user) {
 		if (!loc.isValidType(user)) return 0.0;
-		else return 1.0;
+		else return weightDist(calcDist(loc, user));
 	}
 }

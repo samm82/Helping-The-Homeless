@@ -29,11 +29,11 @@ public class LocationT implements Comparable<LocationT>{
 		return this.score;
 	}
 	
-	public double getLatitude() {
+	public double getLat() {
 		return this.lat;
 	}
 	
-	public double getLongtitude() {
+	public double getLon() {
 		return this.lon;
 	}
 	

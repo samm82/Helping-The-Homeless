@@ -12,9 +12,12 @@ public class UserT {
 	}
 	
 	private UserResT resType;
+	private double lat, lon;
 	
-	public UserT(UserResT type) {
+	public UserT(UserResT type, double lat, double lon) {
 		this.resType = type;
+		this.lat = lat;
+		this.lon = lon;
 	}
 	
 	//public UserResT getResType() { return resType; }
@@ -31,4 +34,8 @@ public class UserT {
 	
 	public boolean isFemale() { return ((resType == UserResT.FEMALE_COED) || 
 			  							(resType == UserResT.FEMALE_ONLY)); }
+	
+	public double getLat() { return lat; }
+	
+	public double getLon() { return lon; }
 }
