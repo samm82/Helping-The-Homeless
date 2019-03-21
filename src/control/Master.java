@@ -60,6 +60,16 @@ public class Master {
 		
 		MaxPQ<ShelterT> pq = new MaxPQ<ShelterT>(masterArray[1]);
 		
+		int counter = 0;
+		
+		for (int i = 0; i < masterArray.length; i++) {
+			for (int j = 0; j < masterArray[i].length; j++) {
+				System.out.println(masterArray[i][j].getProgName());
+				counter ++;
+			}
+		}
+		
+		System.out.println(counter);
 		
 		
 	}
