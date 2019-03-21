@@ -33,14 +33,17 @@ public class Weight {
 	
 	public static double calcDist(LocationT loc, UserT user) {
 		double latS = loc.getLat(), latU = user.getLat();
+		double lonS = loc.getLon(), lonU = user.getLon();
 		
-		double latDiff = (latS - latU);
-		double lonDiff = (loc.getLon() - user.getLon());
+		double latDiff = Math.toRadians((latS - latU));
+		double lonDiff = Math.toRadians((lonS - lonU));
+		
 		double a = Math.pow(Math.sin(latDiff/2), 2) + 
-				   Math.cos(latS) * Math.cos(latU) *
+				   Math.cos(Math.toRadians(latS)) * Math.cos(Math.toRadians(latU)) *
 				   Math.pow(Math.sin(lonDiff/2), 2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		return c * 6371;
+		double dist = c * 6371;
+		return dist;
 	}
 	
 	public static double weightDist(double dist) {
@@ -76,7 +79,10 @@ public class Weight {
 		
 		UserT me = new UserT(UserResT.MALE_ONLY, 43.239487, -73.109472);
 		
-		System.out.println(calcDist(male, me));   // 32.218km
-		System.out.println(calcDist(female, me)); // 18.739km
+		System.out.println("Distance: " + calcDist(male, me));   // 32.218km
+		System.out.println("Distance: " + calcDist(female, me)); // 18.739km
+		System.out.println();
+		System.out.println("Score: " + calcScore(male, me));   // 0.0 -> too far
+		System.out.println("Score: " + calcScore(female, me)); // 0.0 -> wrong type
 	}
 }
