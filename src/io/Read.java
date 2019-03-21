@@ -170,7 +170,7 @@ public class Read {
 	    	    line = line.replaceAll(", ", " ");
 	    	    
 	    	    
-	    	    System.out.println(line);
+//	    	    System.out.println(line);
 	    	    String[] data = line.split(",");
 	    	    String type = data[2];
 	    	    String name = data[4] + " " + data[3];
