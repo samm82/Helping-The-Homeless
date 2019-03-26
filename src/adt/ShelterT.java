@@ -12,7 +12,7 @@ public class ShelterT extends LocationT {
 	private int N, M;
 	
 	public ShelterT(shelterResT type, String orgName, String shelterName, String facilityName, String progName,  String address) {
-		super(shelterName, address);
+		super(shelterName, address, locTypeT.SHELTER);
 		this.type = type;
 		
 		this.orgName = orgName;
@@ -56,20 +56,20 @@ public class ShelterT extends LocationT {
 		return this.progName;
 	}
 	
-	public int[] getOccupancy2018() {
-		return this.occupancy2018;
+	public int getOcc2018(int i) {
+		return this.occupancy2018[i];
 	}
 	
-	public int[] getOccupancy2017() {
-		return this.occupancy2017;
+	public int getOcc2017(int i) {
+		return this.occupancy2017[i];
 	}
 	
-	public int[] getCapacity2018() {
-		return this.capacity2018;
+	public int getCap2018(int i) {
+		return this.capacity2018[i];
 	}
 	
-	public int[] getCapacity2017() {
-		return this.capacity2017;
+	public int getCap2017(int i) {
+		return this.capacity2017[i];
 	}
 	
 //  May not be used due to changing the implementation of user type	

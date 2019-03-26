@@ -2,7 +2,12 @@ package adt;
 
 public class LocationT implements Comparable<LocationT>{
 	
+	public enum locTypeT {
+		SHELTER, COMM_CNTR;
+	}
+	
 	private String name, address;
+	private locTypeT type;
 	private double lat, lon, score;
 	
 	public LocationT(String name, String address) {
@@ -10,9 +15,16 @@ public class LocationT implements Comparable<LocationT>{
 		this.address = address;
 	}
 	
-	public LocationT(String name, String address, double lat, double lon) {
+	public LocationT(String name, String address, locTypeT type) {
 		this.name    = name;
 		this.address = address;
+		this.type    = type;
+	}
+	
+	public LocationT(String name, String address, locTypeT type, double lat, double lon) {
+		this.name    = name;
+		this.address = address;
+		this.type    = type;
 		this.lat     = lat;
 		this.lon     = lon;
 	}
@@ -23,6 +35,10 @@ public class LocationT implements Comparable<LocationT>{
 	
 	public String getAddress() {
 		return this.address;
+	}
+	
+	public locTypeT getLocType() {
+		return this.type;
 	}
 	
 	public double getScore() {

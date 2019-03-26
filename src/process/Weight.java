@@ -2,7 +2,10 @@ package process;
 
 import java.lang.IllegalArgumentException;
 
+import java.util.Calendar;
+
 import adt.LocationT;
+import adt.LocationT.locTypeT;
 import adt.ShelterT;
 import adt.UserT;
 import adt.UserT.UserResT;
@@ -10,8 +13,11 @@ import adt.ShelterT.shelterResT;
 
 public class Weight {
 	
-	public static int calcCapacity(int cap17, int cap18) {
-		return (int) (cap17 * 0.3 + cap18 * 0.7);
+	public static double weightCap(ShelterT shel, int date) {
+		double cap = 0.3 * shel.getOcc2017(date) + 0.7 * shel.getOcc2018(date);
+		if (shel.getCap2018(date) == 0)
+			throw new IllegalArgumentException("Capacity undefined");
+		else return (cap / shel.getOcc2018(date));
 	}
 	
 	/* Copyright (C) 2002 — 2019 Andrew Hedges
@@ -62,17 +68,35 @@ public class Weight {
 	}
 	
 	// Work in progress
-	public static double calcScore(ShelterT loc, UserT user) {
-		if (!loc.isValidType(user)) return 0.0;
-		else return weightDist(calcDist(loc, user));
+	public static double calcScore(LocationT loc, UserT user) {
+		if (loc.getLocType() == locTypeT.SHELTER) {
+			ShelterT shel = (ShelterT) loc;
+			if (!shel.isValidType(user)) {
+				return 0.0;
+			} else {
+				Calendar calendar = Calendar.getInstance();
+				int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
+				return (weightDist(calcDist(loc, user)) + weightCap(shel, dayIndex));
+			}
+		} else {
+			return weightDist(calcDist(loc, user));
+		}
 	}
 	
 	public static void main(String args[]) {
-		ShelterT male   = new ShelterT(shelterResT.MALE,   "ORG", "Sam's Shelter", "Fac", "Get Gud Program",  "420 Blaze Ave");
-		ShelterT female = new ShelterT(shelterResT.FEMALE, "ORG", "Sam's Women  ", "Fac", "Get Girl Program", "422 Blaze Ave");
+		ShelterT male   = new ShelterT(shelterResT.MALE,   "Christie Ossington Neighbourhood Centre", 
+														   "Christie Ossington Men's Hostel",
+														   "Christie Ossington Men's Hostel", 
+														   "Christie Ossington Extreme Weather Program",  
+														   "973 Lansdowne Avenue");
+		ShelterT female = new ShelterT(shelterResT.FEMALE, "Christie Refugee Welcome Centre, Inc.", 
+														   "Christie Refugee Welcome Centre", 
+														   "CR Welcome Centre(Singles)", 
+														   "Christe Refugee Welcome Centre - Singles",
+														   "43 Christie Street");
 		
-		male.setLat(43.420420);
-		male.setLon(-73.420420);
+		male.setLat(43.237000);
+		male.setLon(-73.100000);
 		
 		female.setLat(43.104728);
 		female.setLon(-73.248102);
@@ -82,7 +106,7 @@ public class Weight {
 		System.out.println("Distance: " + calcDist(male, me));   // 32.218km
 		System.out.println("Distance: " + calcDist(female, me)); // 18.739km
 		System.out.println();
-		System.out.println("Score: " + calcScore(male, me));   // 0.0 -> too far
+		System.out.println("Score: " + calcScore(male, me));   // 0.9 + cap
 		System.out.println("Score: " + calcScore(female, me)); // 0.0 -> wrong type
 	}
 }
