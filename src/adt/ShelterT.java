@@ -83,5 +83,13 @@ public class ShelterT extends LocationT {
 		else                                                      return false;
 		
 	}
+	
+	public boolean isValidCap(int date) {
+		return !(this.getCap2018(date) == 0 | this.getCap2017(date) == 0);
+	}
+	
+	public boolean isFull(int date) {
+		return (this.getOcc2018(date) == this.getCap2018(date) && this.getOcc2017(date) == this.getCap2017(date));
+	}
 
 }

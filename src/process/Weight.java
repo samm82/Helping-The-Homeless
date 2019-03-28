@@ -15,9 +15,12 @@ public class Weight {
 	
 	public static double weightCap(ShelterT shel, int date) {
 		double cap = 0.3 * shel.getOcc2017(date) + 0.7 * shel.getOcc2018(date);
-		if (shel.getCap2018(date) == 0)
+		if (shel.getCap2018(date) != 0)
+			return (1 - (cap / shel.getCap2018(date)));
+		else if (shel.getCap2017(date) != 0)
+			return (1 - (shel.getOcc2017(date) / shel.getCap2017(date)));
+		else 
 			throw new IllegalArgumentException("Capacity undefined");
-		else return (cap / shel.getOcc2018(date));
 	}
 	
 	/* Copyright (C) 2002 — 2019 Andrew Hedges
@@ -53,30 +56,22 @@ public class Weight {
 	}
 	
 	public static double weightDist(double dist) {
-		if      (dist < 0.0)  throw new IllegalArgumentException("Distance must be positive");
-		else if (dist < 0.5)  return 1.0;
-		else if (dist < 1.0)  return 0.9;
-		else if (dist < 1.5)  return 0.8;
-		else if (dist < 2.0)  return 0.7;
-		else if (dist < 3.0)  return 0.6;
-		else if (dist < 5.0)  return 0.5;
-		else if (dist < 7.0)  return 0.4;
-		else if (dist < 10.0) return 0.3;
-		else if (dist < 15.0) return 0.2;
-		else if (dist < 25.0) return 0.1;
-		else                  return 0.0;
+		if   (dist < 0.0)  throw new IllegalArgumentException("Distance must be positive");
+		else return (1 - (dist / (5 + dist))); // new formula for more gradual mapping of distances
 	}
 	
 	// Work in progress
 	public static double calcScore(LocationT loc, UserT user) {
+		Calendar calendar = Calendar.getInstance();
+		int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
 		if (loc.getLocType() == locTypeT.SHELTER) {
 			ShelterT shel = (ShelterT) loc;
-			if (!shel.isValidType(user)) {
+			if ((!(shel.isValidType(user) && shel.isValidCap(dayIndex))) || shel.isFull(dayIndex)) {
 				return 0.0;
 			} else {
-				Calendar calendar = Calendar.getInstance();
-				int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
-				return (weightDist(calcDist(loc, user)) + weightCap(shel, dayIndex));
+				System.out.println("   " + weightDist(calcDist(loc, user)));
+				System.out.println("   " + weightCap(shel, dayIndex));
+				return (weightDist(calcDist(loc, user)) + weightCap(shel, dayIndex) / 2);
 			}
 		} else {
 			return weightDist(calcDist(loc, user));
@@ -106,7 +101,7 @@ public class Weight {
 		System.out.println("Distance: " + calcDist(male, me));   // 32.218km
 		System.out.println("Distance: " + calcDist(female, me)); // 18.739km
 		System.out.println();
-		System.out.println("Score: " + calcScore(male, me));   // 0.9 + cap
-		System.out.println("Score: " + calcScore(female, me)); // 0.0 -> wrong type
+//		System.out.println("Score: " + calcScore(male, me));   // 0.9 + cap
+//		System.out.println("Score: " + calcScore(female, me)); // 0.0 -> wrong type
 	}
 }

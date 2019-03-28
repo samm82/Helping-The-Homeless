@@ -13,11 +13,11 @@ import adt.ShelterT.shelterResT;
 public class Read {
 	
 	public static ShelterT[][] readShelterData() {
-		ArrayList<ShelterT> maleArray = new ArrayList<ShelterT>();
+		ArrayList<ShelterT> maleArray   = new ArrayList<ShelterT>();
 		ArrayList<ShelterT> femaleArray = new ArrayList<ShelterT>();
-		ArrayList<ShelterT> coedArray = new ArrayList<ShelterT>();
+		ArrayList<ShelterT> coedArray   = new ArrayList<ShelterT>();
 		ArrayList<ShelterT> familyArray = new ArrayList<ShelterT>();
-		ArrayList<ShelterT> youthArray = new ArrayList<ShelterT>();
+		ArrayList<ShelterT> youthArray  = new ArrayList<ShelterT>();
 		
 		//reads 2018 data
 		try {
@@ -125,7 +125,7 @@ public class Read {
 		sheltersList[2] = coedArray.toArray(sheltersList[2]);
 		
 		sheltersList[3] = new ShelterT[familyArray.size()];
-		sheltersList[3] = maleArray.toArray(sheltersList[3]);
+		sheltersList[3] = familyArray.toArray(sheltersList[3]);
 		
 		sheltersList[4] = new ShelterT[youthArray.size()];
 		sheltersList[4] = youthArray.toArray(sheltersList[4]);
