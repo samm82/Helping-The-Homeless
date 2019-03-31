@@ -246,9 +246,9 @@ public class TST<Value> {
     	
     	TST<AddressT> st = new TST<AddressT>();
     	
-    	AddressT one = new AddressT(32, "thorndale", 30.4544, 39.03873);
-    	AddressT two = new AddressT(40, "cottrill", 30.4589, 39.03890);
-    	AddressT three = new AddressT(18, "thorndale", 30.4543, 39.03872);
+    	AddressT one = new AddressT("32", "thorndale", 30.4544, 39.03873);
+    	AddressT two = new AddressT("40", "cottrill", 30.4589, 39.03890);
+    	AddressT three = new AddressT("18", "thorndale", 30.4543, 39.03872);
     	
     	st.put(one.getNum() + " " + one.getSt(), one);
     	st.put(two.getNum() + " " + two.getSt(), two);
