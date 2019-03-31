@@ -1,6 +1,7 @@
 package process;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import adt.*;
 import adt.ShelterT.shelterResT;
@@ -14,10 +15,16 @@ public class Find {
 		
 		ArrayList<ShelterT> list_of_matching_shelters = new ArrayList<>();
 		
+		Iterator<ShelterT> all_shelters = pq.iterator();
 		
-		
-		
-		
+		while (all_shelters.hasNext()) {
+			
+			ShelterT current_shelter = all_shelters.next();
+			
+			if (current_shelter.getType() == type) {
+				list_of_matching_shelters.add(current_shelter);
+			}
+		}
 		
 		return list_of_matching_shelters.toArray(new ShelterT[list_of_matching_shelters.size()]);
 		
@@ -28,10 +35,16 @@ public class Find {
 		
 		ArrayList<ShelterT> list_of_matching_shelters = new ArrayList<>();
 		
+		Iterator<ShelterT> all_shelters = pq.iterator();
 		
-		
-		
-		
+		while (all_shelters.hasNext()) {
+			
+			ShelterT current_shelter = all_shelters.next();
+			
+			if (current_shelter.getOrgName().toLowerCase().equals(name.toLowerCase())) {
+				list_of_matching_shelters.add(current_shelter);
+			}
+		}
 		
 		return list_of_matching_shelters.toArray(new ShelterT[list_of_matching_shelters.size()]);
 		
@@ -42,10 +55,16 @@ public class Find {
 		
 		ArrayList<ShelterT> list_of_matching_shelters = new ArrayList<>();
 		
+		Iterator<ShelterT> all_shelters = pq.iterator();
 		
-		
-		
-		
+		while (all_shelters.hasNext()) {
+			
+			ShelterT current_shelter = all_shelters.next();
+			
+			if (current_shelter.getName().toLowerCase().equals(name.toLowerCase())) {
+				list_of_matching_shelters.add(current_shelter);
+			}
+		}
 		
 		return list_of_matching_shelters.toArray(new ShelterT[list_of_matching_shelters.size()]);
 		
@@ -56,11 +75,17 @@ public class Find {
 		
 		ArrayList<ShelterT> list_of_matching_shelters = new ArrayList<>();
 		
+		Iterator<ShelterT> all_shelters = pq.iterator();
 		
-		
-		
-		
-		
+		while (all_shelters.hasNext()) {
+			
+			ShelterT current_shelter = all_shelters.next();
+			
+			if (current_shelter.getFacilityName().toLowerCase().equals(name.toLowerCase())) {
+				list_of_matching_shelters.add(current_shelter);
+			}
+		}
+
 		return list_of_matching_shelters.toArray(new ShelterT[list_of_matching_shelters.size()]);
 		
 	}
@@ -71,10 +96,16 @@ public class Find {
 		
 		ArrayList<ShelterT> list_of_matching_shelters = new ArrayList<>();
 		
+		Iterator<ShelterT> all_shelters = pq.iterator();
 		
-		
-		
-		
+		while (all_shelters.hasNext()) {
+			
+			ShelterT current_shelter = all_shelters.next();
+			
+			if (current_shelter.getProgName().toLowerCase().equals(name.toLowerCase())) {
+				list_of_matching_shelters.add(current_shelter);
+			}
+		}
 		
 		return list_of_matching_shelters.toArray(new ShelterT[list_of_matching_shelters.size()]);
 		

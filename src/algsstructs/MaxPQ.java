@@ -114,7 +114,12 @@ public class MaxPQ<Key> implements Iterable<Key> {
         assert isMaxHeap();
         return max;
     }
-
+    
+    /*
+    public Key[] getArray() {
+    	return pq;
+    }
+	*/
 
    /***************************************************************************
     * Helper functions to restore the heap invariant.
