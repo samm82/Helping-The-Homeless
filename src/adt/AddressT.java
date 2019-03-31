@@ -14,7 +14,7 @@ public class AddressT {
 		this.lon = lon;
 	}
 	
-	public int getNum()    { return num; }
+	public String getNum()    { return num; }
 	public String getSt()  { return st;  }
 	public double getLat() { return lat; }
 	public double getLon() { return lon; }
