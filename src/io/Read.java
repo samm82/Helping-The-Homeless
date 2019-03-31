@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import adt.AddressT;
 import adt.CoolingCentreT;
 import adt.CoolingCentreT.CentreT;
 import adt.ShelterT;
@@ -198,4 +199,46 @@ public class Read {
 		
 		return coolList;
 	}
+	
+	public static AddressT[] readAddressData() {
+		
+		ArrayList<AddressT> addresses = new ArrayList<AddressT>();
+		
+		try {
+			
+			Scanner lineScanner = new Scanner(new File("data/Address_points.csv"));
+			lineScanner.nextLine();
+			
+			while(lineScanner.hasNextLine()) {
+			//for (int i = 0; i < 5; i++) {
+				String line = lineScanner.nextLine();
+	    	    line = line.replaceAll(", ", " ");
+	    	    String data[] = line.split(",");
+	    	    
+	    	    String num = data[4];
+	    	    String name = data[5];
+	    	    double lon = Double.parseDouble(data[18]);
+	    	    double lat = Double.parseDouble(data[19]);
+	    	    
+	    	    addresses.add(new AddressT(num, name, lat, lon));
+			}
+
+			
+			lineScanner.close();
+		} catch (Exception e) {
+		}
+		
+		AddressT[] addressList = new AddressT[addresses.size()];
+		addressList = addresses.toArray(addressList);
+		
+		return addressList;
+		
+		
+	}
+	
+	public static void main(String args[]) {
+		readAddressData();
+	}
+	
+	
 }
