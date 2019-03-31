@@ -2,12 +2,12 @@ package adt;
 
 public class AddressT {
 	
-	private final int num;
+	private final String num;
 	private final String st;
 	private final double lat;
 	private final double lon;
 	
-	public AddressT(int num, String st, double lat, double lon) {
+	public AddressT(String num, String st, double lat, double lon) {
 		this.num = num;
 		this.st  = st;
 		this.lat = lat;
