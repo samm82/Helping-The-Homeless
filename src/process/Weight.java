@@ -50,9 +50,7 @@ public class Weight {
 		double a = Math.pow(Math.sin(latDiff/2), 2) + 
 				   Math.cos(Math.toRadians(latS)) * Math.cos(Math.toRadians(latU)) *
 				   Math.pow(Math.sin(lonDiff/2), 2);
-		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		double dist = c * 6371;
-		return dist;
+		return (12742 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
 	}
 	
 	public static double weightDist(double dist) {
