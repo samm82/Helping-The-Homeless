@@ -10,6 +10,7 @@ import adt.CoolingCentreT;
 import adt.CoolingCentreT.CentreT;
 import adt.ShelterT;
 import adt.ShelterT.shelterResT;
+import algsstructs.TST;
 
 public class Read {
 	
@@ -200,9 +201,9 @@ public class Read {
 		return coolList;
 	}
 	
-	public static AddressT[] readAddressData() {
+	public static TST<AddressT> readAddressData() {
 		
-		ArrayList<AddressT> addresses = new ArrayList<AddressT>();
+		TST<AddressT> addresses = new TST<AddressT>();
 		
 		try {
 			
@@ -220,7 +221,8 @@ public class Read {
 	    	    double lon = Double.parseDouble(data[18]);
 	    	    double lat = Double.parseDouble(data[19]);
 	    	    
-	    	    addresses.add(new AddressT(num, name, lat, lon));
+	    	    AddressT temp = new AddressT(num, name, lat, lon);
+	    	    addresses.put(temp.getNum() + " " + temp.getSt(), temp);
 			}
 
 			
@@ -228,10 +230,8 @@ public class Read {
 		} catch (Exception e) {
 		}
 		
-		AddressT[] addressList = new AddressT[addresses.size()];
-		addressList = addresses.toArray(addressList);
 		
-		return addressList;
+		return addresses;
 		
 		
 	}
