@@ -1,3 +1,9 @@
+/*
+ * This library is from Robert Sedgewick and Kevin Wayne, Algorithms 4th Edition. 
+ * The exact copy of the code can be found here: 
+ * https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/Bag.java.html
+ */
+
 package algsstructs;
 
 import java.util.Iterator;
