@@ -67,8 +67,8 @@ public class Weight {
 			if ((!(shel.isValidType(user) && shel.isValidCap(dayIndex))) || shel.isFull(dayIndex)) {
 				return 0.0;
 			} else {
-				System.out.println("   " + weightDist(calcDist(loc, user)));
-				System.out.println("   " + weightCap(shel, dayIndex));
+//				System.out.println("   " + weightDist(calcDist(loc, user)));
+//				System.out.println("   " + weightCap(shel, dayIndex));
 				return (weightDist(calcDist(loc, user)) + weightCap(shel, dayIndex) / 2);
 			}
 		} else {
