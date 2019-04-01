@@ -59,7 +59,7 @@ public class Weight {
 	}
 	
 	// Work in progress
-	public static double calcScore(LocationT loc, UserT user) {
+	public static double calcScoreShel(LocationT loc, UserT user) {
 		Calendar calendar = Calendar.getInstance();
 		int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
 		if (loc.getLocType() == locTypeT.SHELTER) {
