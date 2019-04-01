@@ -19,6 +19,9 @@ import org.eclipse.swt.widgets.Text;
 
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import adt.UserT;
+import adt.UserT.UserResT;
+
 public class FindShelter {
 
 	protected Shell shell;
@@ -32,8 +35,6 @@ public class FindShelter {
 	private Text address;
 	private String add;
 	
-	
-
 	/**
 	 * Launch the application.
 	 * @param args
@@ -201,5 +202,24 @@ public class FindShelter {
 		
 		address = new Text(shell, SWT.BORDER);
 		address.setBounds(10, 76, 630, 26);
+	}
+	
+	public UserT getUserInfo() {
+		UserResT type;
+				
+		if      (this.youth)  type = UserResT.YOUTH;
+		else if (this.family) type = UserResT.FAMILY;
+		else if (this.CoEd) {
+			if (this.male) type = UserResT.MALE_COED;
+			else           type = UserResT.FEMALE_COED;
+		} else {
+			if (this.male) type = UserResT.MALE_ONLY;
+			else           type = UserResT.FEMALE_ONLY;
+		}
+		
+		UserT user = new UserT(type, 43.420420, -73.203829);
+		
+		return user;
+		
 	}
 }

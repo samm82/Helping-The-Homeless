@@ -7,6 +7,7 @@ import adt.UserT;
 import adt.UserT.UserResT;
 
 import algsstructs.*;
+import io.MainWindow;
 import io.Read;
 import process.Weight;
 
@@ -21,6 +22,14 @@ public class Master {
 		
 		
 		TST<AddressT> addresses = Read.readAddressData();
+		
+		// opens GUI
+		try {
+			MainWindow window = new MainWindow();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		UserT user = new UserT(UserResT.MALE_ONLY, addresses.get("399 Bathurst St").getLat(), addresses.get("399 Bathurst St").getLon());
 		
