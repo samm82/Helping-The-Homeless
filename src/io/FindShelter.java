@@ -19,10 +19,13 @@ import org.eclipse.swt.widgets.Text;
 
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import adt.UserInputT;
 import adt.UserT.UserResT;
 
 public class FindShelter {
 
+	private UserInputT info;
+	
 	protected Shell shell;
 	private boolean male;
 	private boolean youth;
@@ -30,6 +33,7 @@ public class FindShelter {
 	private boolean CoEd;
 	private Text address;
 	private String add;
+	private String _address_;
 	
 	/**
 	 * Launch the application.
@@ -47,16 +51,22 @@ public class FindShelter {
 	/**
 	 * Open the window.
 	 */
-	public void open() {
+	public UserInputT open() {
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
 		shell.layout();
+		UserResT type = getUserType();
+		String   add  = _address_;
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
+			type = getUserType();
+			add  = _address_;
 		}
+		info = new UserInputT(type, add);
+		return info;
 	}
 
 	/**
@@ -167,9 +177,10 @@ public class FindShelter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				add = address.getText().replace(" ", "+");
+				_address_ = address.getText();
 		        String url = "https://www.google.ca/maps/dir/" + add + "/Downtown+Toronto";
 
-		        if(Desktop.isDesktopSupported()){
+		        if (Desktop.isDesktopSupported()) {
 		            Desktop desktop = Desktop.getDesktop();
 		            try {
 		                desktop.browse(new URI(url));
@@ -177,7 +188,7 @@ public class FindShelter {
 		                // TODO Auto-generated catch block
 		                e1.printStackTrace();
 		            }
-		        }else{
+		        } else {
 		            Runtime runtime = Runtime.getRuntime();
 		            try {
 		                runtime.exec("xdg-open " + url);
@@ -201,18 +212,18 @@ public class FindShelter {
 	}
 	
 	public UserResT getUserType() {		
-		if      (this.youth)  return UserResT.YOUTH;
-		else if (this.family) return UserResT.FAMILY;
-		else if (this.CoEd) {
-			if  (this.male)   return UserResT.MALE_COED;
-			else              return UserResT.FEMALE_COED;
+		if      (youth)  return UserResT.YOUTH;
+		else if (family) return UserResT.FAMILY;
+		else if (CoEd) {
+			if  (male)   return UserResT.MALE_COED;
+			else         return UserResT.FEMALE_COED;
 		} else {
-			if  (this.male)   return UserResT.MALE_ONLY;
-			else              return UserResT.FEMALE_ONLY;
+			if  (male)   return UserResT.MALE_ONLY;
+			else         return UserResT.FEMALE_ONLY;
 		}
 	}
 	
 	public String getAddress() {
-		return this.address.getText();
+		return address.getText();
 	}
 }

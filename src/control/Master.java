@@ -3,6 +3,7 @@ package control;
 import adt.AddressT;
 import adt.CoolingCentreT;
 import adt.ShelterT;
+import adt.UserInputT;
 import adt.UserT;
 import adt.UserT.UserResT;
 
@@ -14,6 +15,7 @@ import process.Weight;
 // Control module which will control all of our functionality
 public class Master {
 	
+	private static UserInputT info;
 	private static UserT user;
 	
 	public static void main(String args[]) {	
@@ -28,13 +30,10 @@ public class Master {
 		// opens GUI
 		try {
 		MainWindow window = new MainWindow();
-		window.open();
-		UserResT userType = window.getUserType();
-		String   address  = window.getAddress();
-		System.out.println(address);
+		info = window.open();
 		
-		user = new UserT(userType, addresses.get(address).getLat(), addresses.get(address).getLon());
-		System.out.println(user.toString());
+		String add = info.getAdd();
+		user = new UserT(info.getType(), addresses.get(add).getLat(), addresses.get(add).getLon());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,9 +49,6 @@ public class Master {
 
 				System.out.println(i + " " + j + " "  + masterArray[i][j]);
 //				System.out.println("   " + masterArray[i][j].getScore());
-
-				//System.out.println(i + " " + j + " "  + masterArray[i][j].getProgName());
-				//System.out.println("   " + masterArray[i][j].getScore());
 
 			}
 		}
@@ -79,15 +75,12 @@ public class Master {
 			System.out.println(i + " " + cool[i]);
 //			System.out.println("   " + cool[i].getScore());
 
-			//System.out.println(i + " " + cool[i].getName());
-			//System.out.println("   " + cool[i].getScore());
-
 		}
 		
 		MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
 		
 		System.out.println(pq0.delMax().getName());
-		
+		System.out.println(pq2.delMax().getName());
 		
 	}
 
