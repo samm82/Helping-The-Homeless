@@ -91,5 +91,10 @@ public class ShelterT extends LocationT {
 	public boolean isFull(int date) {
 		return (this.getOcc2018(date) == this.getCap2018(date) && this.getOcc2017(date) == this.getCap2017(date));
 	}
+	
+	@Override
+	public String toString() {
+		return this.getName() + ", " + this.getProgName() + " | " + this.getAddress();
+	}
 
 }

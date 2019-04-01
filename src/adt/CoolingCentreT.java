@@ -17,5 +17,10 @@ public class CoolingCentreT extends LocationT {
 	public CentreT getType() {
 		return this.type;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getName() + " | " + this.getAddress();
+	}
 
 }

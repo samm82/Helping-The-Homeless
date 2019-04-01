@@ -29,8 +29,8 @@ public class Master {
 				// sets score for each shelter
 				masterArray[i][j].setScore(Weight.calcScore(masterArray[i][j], user));
 				
-				System.out.println(i + " " + j + " "  + masterArray[i][j].getProgName());
-				System.out.println("   " + masterArray[i][j].getScore());
+				System.out.println(i + " " + j + " "  + masterArray[i][j]);
+//				System.out.println("   " + masterArray[i][j].getScore());
 			}
 		}
 		
@@ -52,8 +52,8 @@ public class Master {
 			// sets score for each cooling centre
 			cool[i].setScore(Weight.calcScore(cool[i], user));
 			
-			System.out.println(i + " " + cool[i].getName());
-			System.out.println("   " + cool[i].getScore());
+			System.out.println(i + " " + cool[i]);
+//			System.out.println("   " + cool[i].getScore());
 		}
 		
 		MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
