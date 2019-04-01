@@ -185,7 +185,7 @@ public class FindShelter {
 		                // TODO Auto-generated catch block
 		                e1.printStackTrace();
 		            }
-		        } 
+		        }
 			}
 		});
 		btnFindShelter.setBounds(10, 197, 630, 30);
