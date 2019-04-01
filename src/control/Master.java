@@ -3,6 +3,7 @@ package control;
 import java.util.ArrayList;
 
 import algsstructs.*;
+import adt.AddressT;
 import adt.CoolingCentreT;
 import adt.ShelterT;
 import adt.UserT;
@@ -54,6 +55,8 @@ public class Master {
 		}
 		
 		MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
+		
+		TST<AddressT> addresses = Read.readAddressData();
 		
 	}
 

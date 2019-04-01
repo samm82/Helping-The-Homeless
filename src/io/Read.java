@@ -206,7 +206,6 @@ public class Read {
 		TST<AddressT> addresses = new TST<AddressT>();
 		
 		try {
-			
 			Scanner lineScanner = new Scanner(new File("data/Address_points.csv"));
 			lineScanner.nextLine();
 			
@@ -225,16 +224,12 @@ public class Read {
 	    	    addresses.put(temp.getNum() + " " + temp.getSt(), temp);
 			}
 
-			
 			lineScanner.close();
 		} catch (Exception e) {
 		}
 		
-		
 		return addresses;
-		
-		
-	}
 	
+	}
 	
 }
