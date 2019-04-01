@@ -8,12 +8,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-import adt.UserT.UserResT;
+import adt.UserInputT;
 
 public class MainWindow {
 	
-	private UserResT type;
-	private String   add;
+	private UserInputT info;
 
 	protected Shell shell;
 
@@ -33,7 +32,7 @@ public class MainWindow {
 	/**
 	 * Open the window.
 	 */
-	public void open() {
+	public UserInputT open() {
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
@@ -43,6 +42,7 @@ public class MainWindow {
 				display.sleep();
 			}
 		}
+		return info;
 	}
 
 	/**
@@ -59,10 +59,7 @@ public class MainWindow {
 			public void widgetSelected(SelectionEvent e) {
 				shell.dispose();
 				FindShelter FindShelter = new FindShelter();
-				FindShelter.open();
-				
-				type = FindShelter.getUserType();
-				add  = FindShelter.getAddress();
+				info = FindShelter.open();
 			}
 		});
 		btnFindShelter.setBounds(10, 84, 200, 30);
@@ -81,7 +78,4 @@ public class MainWindow {
 		btnGetShelterInfo.setText("Get Shelter Info");
 
 	}
-	
-	public UserResT getUserType() { return type; }
-	public String   getAddress()  { return add; }
 }
