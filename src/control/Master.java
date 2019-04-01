@@ -14,6 +14,8 @@ import process.Weight;
 // Control module which will control all of our functionality
 public class Master {
 	
+	private static UserT user;
+	
 	public static void main(String args[]) {	
 		// creates a 2d array of all shelters
 		ShelterT[][] masterArray = Read.readShelterData();
@@ -25,16 +27,17 @@ public class Master {
 		
 		// opens GUI
 		try {
-			MainWindow window = new MainWindow();
-			window.open();
+		MainWindow window = new MainWindow();
+		window.open();
+		UserResT userType = window.getUserType();
+		String   address  = window.getAddress();
+		System.out.println(address);
+		
+		user = new UserT(userType, addresses.get(address).getLat(), addresses.get(address).getLon());
+		System.out.println(user.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		UserT user = new UserT(UserResT.MALE_ONLY, addresses.get("399 Bathurst St").getLat(), addresses.get("399 Bathurst St").getLon());
-		
-		
-		
 		
 		System.out.println();
 		System.out.println("Shelters:");

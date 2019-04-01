@@ -19,19 +19,15 @@ import org.eclipse.swt.widgets.Text;
 
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import adt.UserT;
 import adt.UserT.UserResT;
 
 public class FindShelter {
 
 	protected Shell shell;
-	private boolean female;
 	private boolean male;
 	private boolean youth;
 	private boolean family;
-	private boolean neither;
 	private boolean CoEd;
-	private boolean noCoEd;
 	private Text address;
 	private String add;
 	
@@ -89,7 +85,6 @@ public class FindShelter {
 		Female.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				female = true;
 				male = false;
 			}
 		});
@@ -101,7 +96,6 @@ public class FindShelter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				male = true;
-				female = false;
 			}
 		});
 		Male.setBounds(0, 10, 57, 20);
@@ -116,7 +110,6 @@ public class FindShelter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CoEd = false;
-				noCoEd = true;
 			}
 		});
 		btnNoCoed.setBounds(122, 10, 89, 20);
@@ -127,7 +120,6 @@ public class FindShelter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CoEd = true;
-				noCoEd = false;
 			}
 		});
 		btnCoed.setBounds(0, 10, 72, 20);
@@ -143,7 +135,6 @@ public class FindShelter {
 			public void widgetSelected(SelectionEvent e) {
 				youth = false;
 				family = false;
-				neither = true;
 			}
 		});
 		btnNeither.setBounds(170, 10, 72, 20);
@@ -155,7 +146,6 @@ public class FindShelter {
 			public void widgetSelected(SelectionEvent e) {
 				youth = false;
 				family = true;
-				neither = false;
 			}
 		});
 		btnFamily.setBounds(82, 10, 66, 20);
@@ -167,7 +157,6 @@ public class FindShelter {
 			public void widgetSelected(SelectionEvent e) {
 				youth = true;
 				family = false;
-				neither = false;
 			}
 		});
 		btnYouth.setBounds(0, 10, 66, 20);
@@ -177,19 +166,26 @@ public class FindShelter {
 		btnFindShelter.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				// Create Desktop object
-	            Desktop d=Desktop.getDesktop();
-	            // Browse a URL, for example www.facebook.com
-	            try {
-	            	add = address.getText().replace(" ", "+");
-					d.browse(new URI("https://www.google.ca/maps/dir/" + add + "/Downtown+Toronto"));
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (URISyntaxException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
+				add = address.getText().replace(" ", "+");
+		        String url = "https://www.google.ca/maps/dir/" + add + "/Downtown+Toronto";
+
+		        if(Desktop.isDesktopSupported()){
+		            Desktop desktop = Desktop.getDesktop();
+		            try {
+		                desktop.browse(new URI(url));
+		            } catch (IOException | URISyntaxException e1) {
+		                // TODO Auto-generated catch block
+		                e1.printStackTrace();
+		            }
+		        }else{
+		            Runtime runtime = Runtime.getRuntime();
+		            try {
+		                runtime.exec("xdg-open " + url);
+		            } catch (IOException e1) {
+		                // TODO Auto-generated catch block
+		                e1.printStackTrace();
+		            }
+		        } 
 			}
 		});
 		btnFindShelter.setBounds(10, 197, 630, 30);
@@ -204,22 +200,19 @@ public class FindShelter {
 		address.setBounds(10, 76, 630, 26);
 	}
 	
-	public UserT getUserInfo() {
-		UserResT type;
-				
-		if      (this.youth)  type = UserResT.YOUTH;
-		else if (this.family) type = UserResT.FAMILY;
+	public UserResT getUserType() {		
+		if      (this.youth)  return UserResT.YOUTH;
+		else if (this.family) return UserResT.FAMILY;
 		else if (this.CoEd) {
-			if (this.male) type = UserResT.MALE_COED;
-			else           type = UserResT.FEMALE_COED;
+			if  (this.male)   return UserResT.MALE_COED;
+			else              return UserResT.FEMALE_COED;
 		} else {
-			if (this.male) type = UserResT.MALE_ONLY;
-			else           type = UserResT.FEMALE_ONLY;
+			if  (this.male)   return UserResT.MALE_ONLY;
+			else              return UserResT.FEMALE_ONLY;
 		}
-		
-		UserT user = new UserT(type, 43.420420, -73.203829);
-		
-		return user;
-		
+	}
+	
+	public String getAddress() {
+		return this.address.getText();
 	}
 }

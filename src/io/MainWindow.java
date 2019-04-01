@@ -1,13 +1,19 @@
 package io;
 
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Button;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+import adt.UserT.UserResT;
+
 public class MainWindow {
+	
+	private UserResT type;
+	private String   add;
 
 	protected Shell shell;
 
@@ -54,6 +60,9 @@ public class MainWindow {
 				shell.dispose();
 				FindShelter FindShelter = new FindShelter();
 				FindShelter.open();
+				
+				type = FindShelter.getUserType();
+				add  = FindShelter.getAddress();
 			}
 		});
 		btnFindShelter.setBounds(10, 84, 200, 30);
@@ -72,4 +81,7 @@ public class MainWindow {
 		btnGetShelterInfo.setText("Get Shelter Info");
 
 	}
+	
+	public UserResT getUserType() { return type; }
+	public String   getAddress()  { return add; }
 }
