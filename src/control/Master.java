@@ -39,11 +39,21 @@ public class Master {
 			}
 		}
 		
-		MaxPQ<ShelterT> pq = new MaxPQ<ShelterT>(masterArray[1]);
+		MaxPQ<ShelterT> pq0 = new MaxPQ<ShelterT>(masterArray[0]);
+		MaxPQ<ShelterT> pq1 = new MaxPQ<ShelterT>(masterArray[1]);
+		MaxPQ<ShelterT> pq2 = new MaxPQ<ShelterT>(masterArray[2]);
+		MaxPQ<ShelterT> pq3 = new MaxPQ<ShelterT>(masterArray[3]);
+		MaxPQ<ShelterT> pq4 = new MaxPQ<ShelterT>(masterArray[4]);
 //		
 //		System.out.println(counter);
 		
 		CoolingCentreT[] cool = Read.readCoolingData();
+		
+		for (int i = 0; i < cool.length; i++) {
+			cool[i].setScore(Weight.calcScore(cool[i], user));
+		}
+		
+		MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
 		
 	}
 
