@@ -33,8 +33,8 @@ public class Master {
 		for (int i = 0; i < masterArray.length; i++) {
 			for (int j = 0; j < masterArray[i].length; j++) {
 				System.out.println(i + " " + j + " "  + masterArray[i][j].getProgName());
-				System.out.println("   " + Weight.calcScoreShel(masterArray[i][j], user));
-				masterArray[i][j].setScore(Weight.calcScoreShel(masterArray[i][j], user));
+				System.out.println("   " + Weight.calcScore(masterArray[i][j], user));
+				masterArray[i][j].setScore(Weight.calcScore(masterArray[i][j], user));
 //				counter ++;
 			}
 		}
