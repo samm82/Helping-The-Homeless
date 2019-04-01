@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Text;
 
 import org.eclipse.wb.swt.SWTResourceManager;
 
-public class GUI {
+public class FindShelter {
 
 	protected Shell shell;
 	private Text text;
@@ -34,7 +34,7 @@ public class GUI {
 	 */
 	public static void main(String[] args) {
 		try {
-			GUI window = new GUI();
+			FindShelter window = new FindShelter();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
