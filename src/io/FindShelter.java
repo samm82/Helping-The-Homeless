@@ -1,5 +1,10 @@
 package io;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.eclipse.swt.SWT;
 
 import org.eclipse.swt.events.SelectionAdapter;
@@ -17,7 +22,6 @@ import org.eclipse.wb.swt.SWTResourceManager;
 public class FindShelter {
 
 	protected Shell shell;
-	private Text text;
 	private boolean female;
 	private boolean male;
 	private boolean youth;
@@ -25,6 +29,8 @@ public class FindShelter {
 	private boolean neither;
 	private boolean CoEd;
 	private boolean noCoEd;
+	private Text address;
+	private String add;
 	
 	
 
@@ -62,25 +68,21 @@ public class FindShelter {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		shell.setSize(668, 478);
+		shell.setSize(668, 301);
 		shell.setText("Best Shelter");
 		shell.scroll(0, 0, 0, 0, 5, 5, true);
 		shell.setLayout(null);
 		
 		Label lblHereAreYour = new Label(shell, SWT.NONE);
-		lblHereAreYour.setBounds(10, 10, 630, 60);
+		lblHereAreYour.setBounds(10, 10, 630, 33);
 		lblHereAreYour.setFont(SWTResourceManager.getFont("Times New Roman", 14, SWT.BOLD));
 		lblHereAreYour.setAlignment(SWT.CENTER);
 		lblHereAreYour.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblHereAreYour.setText("Here are your best shelters");
 		
-		text = new Text(shell, SWT.READ_ONLY | SWT.V_SCROLL);
-		text.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		text.setBounds(10, 189, 630, 232);
-		
 		Group group = new Group(shell, SWT.NONE);
 		group.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		group.setBounds(10, 76, 188, 32);
+		group.setBounds(10, 108, 188, 32);
 		
 		Button Female = new Button(group, SWT.RADIO);
 		Female.addSelectionListener(new SelectionAdapter() {
@@ -106,7 +108,7 @@ public class FindShelter {
 		
 		Group group_1 = new Group(shell, SWT.NONE);
 		group_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		group_1.setBounds(426, 76, 214, 33);
+		group_1.setBounds(426, 108, 214, 33);
 		
 		Button btnNoCoed = new Button(group_1, SWT.RADIO);
 		btnNoCoed.addSelectionListener(new SelectionAdapter() {
@@ -132,7 +134,7 @@ public class FindShelter {
 		
 		Group group_2 = new Group(shell, SWT.NONE);
 		group_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		group_2.setBounds(210, 114, 242, 32);
+		group_2.setBounds(210, 146, 242, 32);
 		
 		Button btnNeither = new Button(group_2, SWT.RADIO);
 		btnNeither.addSelectionListener(new SelectionAdapter() {
@@ -174,27 +176,30 @@ public class FindShelter {
 		btnFindShelter.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				text.append("Male: "+ male + " Female: " + female + "\nCo-Ed: " + CoEd + " no Co-Ed: " + noCoEd + "\nYouth: " + youth + " Family: " + family + " Neither: " + neither);
-
-//				for (int i = 1; i < 100; i++) {
-//					int strnum = (int) (Math.sqrt(i*16)+Math.sqrt(i)+3*i);
-//					float dist = (float) (i*1.25/3.5);
-//					//Name, address, dist, type, 
-//					text.append("Shelter " + i + "\t\t\t\t\t" + dist + "km" + "\n" + strnum + " Fake St W\n\n");
-//				}
+				// Create Desktop object
+	            Desktop d=Desktop.getDesktop();
+	            // Browse a URL, for example www.facebook.com
+	            try {
+	            	add = address.getText().replace(" ", "+");
+					d.browse(new URI("https://www.google.ca/maps/dir/" + add + "/Downtown+Toronto"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 			}
 		});
-		btnFindShelter.setBounds(10, 153, 630, 30);
+		btnFindShelter.setBounds(10, 197, 630, 30);
 		btnFindShelter.setText("Find Shelter");
-
-		// male/female
-		// co-ed/no co-ed
-		// family/youth/nether
-//		for (int i = 1; i < 100; i++) {
-//			int strnum = (int) (Math.sqrt(i*16)+Math.sqrt(i)+3*i);
-//			float dist = (float) (i*1.25/3.5);
-//			//Name, address, dist, type, 
-//			text.append("Shelter " + i + "\t\t\t\t\t" + dist + "km" + "\n" + strnum + " Fake St W\n\n");
-//		}
+		
+		Label lblEnterYourCurrent = new Label(shell, SWT.NONE);
+		lblEnterYourCurrent.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblEnterYourCurrent.setBounds(10, 50, 188, 20);
+		lblEnterYourCurrent.setText("Enter Your Current Address");
+		
+		address = new Text(shell, SWT.BORDER);
+		address.setBounds(10, 76, 630, 26);
 	}
 }

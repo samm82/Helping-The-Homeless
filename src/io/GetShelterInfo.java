@@ -40,7 +40,7 @@ public class GetShelterInfo {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(450, 300);
+		shell.setSize(570, 368);
 		shell.setText("SWT Application");
 
 	}
