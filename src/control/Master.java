@@ -1,12 +1,18 @@
 package control;
 
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+
 import adt.AddressT;
 import adt.CoolingCentreT;
 import adt.ShelterT;
 import adt.UserInputT;
 import adt.UserT;
-
-import algsstructs.*;
+import algsstructs.MaxPQ;
+import algsstructs.TST;
 import io.MainWindow;
 import io.Read;
 import process.Weight;
@@ -20,7 +26,10 @@ public class Master {
 	public static void main(String args[]) {	
 		// creates a 2d array of all shelters
 		ShelterT[][] masterArray = Read.readShelterData();
-					
+		
+		Master main = new Master();
+		main.loadJar(args);
+		
 		// opens GUI
 		try {
 		MainWindow window = new MainWindow();
@@ -77,4 +86,53 @@ public class Master {
 		System.out.println(pq0.delMax().getName());
 		System.out.println(pq2.delMax().getName());
 	}
+	
+	private void loadJar(String[] args) {
+		try {
+            Class.forName("org.eclipse.swt.widgets.Shell");
+            // Already on classpath
+            return;
+        } catch (ClassNotFoundException e) {
+            // Add the JAR
+        }
+		
+		String osName = System.getProperty("os.name");
+		osName = osName.toLowerCase();
+		File swtVersion;
+		
+		if(osName.contains("win")) {
+			swtVersion = new File("lib/swt_win.jar");
+		}
+		else if(osName.contains("nix")) {
+			swtVersion = new File("lib/swt_linux.jar");
+		}
+		else {
+			throw new RuntimeException("Unknown OS");
+		}
+		
+		try {
+			
+			URLClassLoader classLoader = (URLClassLoader) getClass().getClassLoader();
+            Method addUrlMethod = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+            addUrlMethod.setAccessible (true);
+
+            URL swtFileUrl = swtVersion.toURI ().toURL ();
+            addUrlMethod.invoke (classLoader, swtFileUrl);
+            
+   		 	URLClassLoader cl = (URLClassLoader) getClass().getClassLoader(); //NOPMD
+	        Class<?> c = cl.loadClass ("de.pdark.epen.editor.EPenEditor");
+	        Class<?> shellClass = cl.loadClass ("org.eclipse.swt.widgets.Shell");
+
+	        Constructor<?> ctor = c.getConstructor (shellClass);
+	        Object obj = ctor.newInstance (new Object[] { null });
+	        Method run = c.getMethod ("run", args.getClass ()); //$NON-NLS-1$
+	        run.invoke (obj, new Object[] { args });
+			
+		} catch (Exception e) {
+		}
+		
+
+		
+	}
+	
 }
