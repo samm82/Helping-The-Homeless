@@ -9,6 +9,7 @@ import adt.LocationT.locTypeT;
 import adt.ShelterT;
 import adt.UserT;
 import adt.UserT.UserResT;
+import io.Read;
 import adt.ShelterT.shelterResT;
 
 public class Weight {
@@ -44,13 +45,20 @@ public class Weight {
 		double latS = loc.getLat(), latU = user.getLat();
 		double lonS = loc.getLon(), lonU = user.getLon();
 		
-		double latDiff = Math.toRadians((latS - latU));
-		double lonDiff = Math.toRadians((lonS - lonU));
+//		double latDiff = Math.toRadians(Math.abs(latS - latU));
+//		double lonDiff = Math.toRadians(Math.abs(lonS - lonU));
+//		
+//		double a = Math.sin(latDiff/2) * Math.sin(latDiff/2) + 
+//				   Math.cos(Math.toRadians(latS)) * Math.cos(Math.toRadians(latU)) *
+//				   Math.sin(lonDiff/2) * Math.sin(lonDiff/2);
+//		return (12742 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
 		
-		double a = Math.pow(Math.sin(latDiff/2), 2) + 
-				   Math.cos(Math.toRadians(latS)) * Math.cos(Math.toRadians(latU)) *
-				   Math.pow(Math.sin(lonDiff/2), 2);
-		return (12742 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+		// a simplified calculation since Toronto is relatively flat
+		// from https://stackoverflow.com/questions/1664799/calculating-distance-between-two-points-using-pythagorean-theorem
+		double d_ew = (lonS - lonU) * Math.cos(Math.toRadians(latU));
+		double d_ns = (latS - latU);
+		
+		return Math.sqrt(d_ew * d_ew + d_ns * d_ns);
 	}
 	
 	public static double weightDist(double dist) {
@@ -69,7 +77,7 @@ public class Weight {
 			} else {
 //				System.out.println("   " + weightDist(calcDist(loc, user)));
 //				System.out.println("   " + weightCap(shel, dayIndex));
-				return (weightDist(calcDist(loc, user)) + weightCap(shel, dayIndex) / 2);
+				return (0.75 * weightDist(calcDist(loc, user)) + 0.25 * weightCap(shel, dayIndex));
 			}
 		} else {
 			return weightDist(calcDist(loc, user));
@@ -78,28 +86,37 @@ public class Weight {
 	
 	
 	public static void main(String args[]) {
-		ShelterT male   = new ShelterT(shelterResT.MALE,   "Christie Ossington Neighbourhood Centre", 
-														   "Christie Ossington Men's Hostel",
-														   "Christie Ossington Men's Hostel", 
-														   "Christie Ossington Extreme Weather Program",  
-														   "973 Lansdowne Avenue");
-		ShelterT female = new ShelterT(shelterResT.FEMALE, "Christie Refugee Welcome Centre, Inc.", 
-														   "Christie Refugee Welcome Centre", 
-														   "CR Welcome Centre(Singles)", 
-														   "Christe Refugee Welcome Centre - Singles",
-														   "43 Christie Street");
+		ShelterT[][] masterArray = Read.readShelterData();
 		
-		male.setLat(43.237000);
-		male.setLon(-73.100000);
+		UserT user = new UserT(UserResT.MALE_ONLY, 43.59631373, -79.54658312);	
 		
-		female.setLat(43.104728);
-		female.setLon(-73.248102);
+		for (int i = 0; i < masterArray.length; i++) {
+			for (int j = 0; j < masterArray[i].length; j++) {
+				// sets score for each shelter
+				masterArray[i][j].setScore(Weight.calcScore(masterArray[i][j], user));
+
+			}
+		}
 		
-		UserT me = new UserT(UserResT.MALE_ONLY, 43.239487, -73.109472);
+		for (ShelterT shel : masterArray[2]) {
+			if (shel.getAddress().equalsIgnoreCase("38 Bathrust St")) {
+				System.out.println(shel.getAddress());
+				
+				System.out.println("Lat: " + shel.getLat() + " Lon: " + shel.getLon());
+				
+				System.out.println("Distance: " + calcDist(shel, user));
+				System.out.println("WghtDist: " + weightDist(calcDist(shel, user)));
+				Calendar calendar = Calendar.getInstance();
+				int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
+				System.out.println("Cap:      " + weightCap(shel, dayIndex));
+				System.out.println("Score:    " + calcScore(shel, user));
+			}
+		}
+
 		
-		System.out.println("Distance: " + calcDist(male, me));   // 32.218km
-		System.out.println("Distance: " + calcDist(female, me)); // 18.739km
-		System.out.println();
+//		System.out.println("Distance: " + calcDist(male, me));   // 32.218km
+//		System.out.println("Distance: " + calcDist(female, me)); // 18.739km
+//		System.out.println();
 //		System.out.println("Score: " + calcScore(male, me));   // 0.9 + cap
 //		System.out.println("Score: " + calcScore(female, me)); // 0.0 -> wrong type
 	}

@@ -17,6 +17,8 @@ public class Master {
 	private static UserInputT info;
 	private static UserT user;
 	
+	private static TST<AddressT> addresses;
+	
 	public static void main(String args[]) {	
 		// creates a 2d array of all shelters
 		ShelterT[][] masterArray = Read.readShelterData();
@@ -24,9 +26,9 @@ public class Master {
 		try {
 		MainWindow window = new MainWindow();
 		info = window.open();
-		System.out.println(info);
+//		System.out.println(info);
 		
-		TST<AddressT> addresses = Read.readAddressData();
+		addresses = Read.readAddressData();
 		
 		String add = info.getAdd();
 		user = new UserT(info.getType(), addresses.get(add).getLat(), addresses.get(add).getLon());
@@ -37,13 +39,19 @@ public class Master {
 		System.out.println("Shelters:");
 		System.out.println();
 		
+		AddressT add;
 		for (int i = 0; i < masterArray.length; i++) {
 			for (int j = 0; j < masterArray[i].length; j++) {
+				add = addresses.get(masterArray[i][j].getAddress());
+				System.out.println(add);
+				masterArray[i][j].setLat(add.getLat());
+				masterArray[i][j].setLon(add.getLon());
+				
 				// sets score for each shelter
 				masterArray[i][j].setScore(Weight.calcScore(masterArray[i][j], user));
 
 				System.out.println(i + " " + j + " "  + masterArray[i][j]);
-//				System.out.println("   " + masterArray[i][j].getScore());
+				System.out.println("   " + masterArray[i][j].getScore());
 
 			}
 		}
@@ -67,7 +75,7 @@ public class Master {
 			cool[i].setScore(Weight.calcScore(cool[i], user));
 			
 
-			System.out.println(i + " " + cool[i]);
+//			System.out.println(i + " " + cool[i]);
 //			System.out.println("   " + cool[i].getScore());
 		}
 		
