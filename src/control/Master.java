@@ -20,7 +20,6 @@ public class Master {
 	public static void main(String args[]) {	
 		// creates a 2d array of all shelters
 		ShelterT[][] masterArray = Read.readShelterData();
-
 		// opens GUI
 		try {
 		MainWindow window = new MainWindow();
