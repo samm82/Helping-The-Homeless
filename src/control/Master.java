@@ -1,18 +1,12 @@
 package control;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLClassLoader;
-
 import adt.AddressT;
 import adt.CoolingCentreT;
 import adt.ShelterT;
 import adt.UserInputT;
 import adt.UserT;
-import algsstructs.MaxPQ;
-import algsstructs.TST;
+
+import algsstructs.*;
 import io.MainWindow;
 import io.Read;
 import process.Weight;
@@ -26,7 +20,7 @@ public class Master {
 	public static void main(String args[]) {	
 		// creates a 2d array of all shelters
 		ShelterT[][] masterArray = Read.readShelterData();
-		
+
 		// opens GUI
 		try {
 		MainWindow window = new MainWindow();
@@ -83,5 +77,4 @@ public class Master {
 		System.out.println(pq0.delMax().getName());
 		System.out.println(pq2.delMax().getName());
 	}
-	
 }
