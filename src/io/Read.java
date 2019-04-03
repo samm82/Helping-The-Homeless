@@ -53,7 +53,9 @@ public class Read {
 					String  orgName = data[1], shelterName = data[2], address = data[3], facilityName = data[7], progName = data[8],  type = data[9];
 					
 					address = address.replace("Avenue", "Ave").replace("Road", "Rd").replace("Drive", "Dr").replace("Street", "St");
+					address = address.replace("Ave Toronto", "Ave").replace("Rd Toronto", "Rd").replace("Dr Toronto", "Dr").replace("St Toronto", "St");
 					address = address.replace("East", "E").replace("West", "W").replace("North", "N").replace("South", "S");
+					address = address.replace("Bathrust", "Bathurst").replace("Ave.", "Ave");
 					
 					int occ = Integer.parseInt(data[10]), cap = Integer.parseInt(data[11]);
 					String[] vals = {orgName, shelterName, facilityName, progName, address};
