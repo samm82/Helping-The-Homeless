@@ -14,6 +14,10 @@ import algsstructs.TST;
 
 public class Read {
 	
+	/*
+	 * A Method that reads data from an input file and returns a list of shelters that s organized into one of 5 requirement categories (Male, female, coed, family, youth).
+	 * @return returns a 2D array of type ShelterT, represents all the shelters being used as recommendations.
+	 */
 	public static ShelterT[][] readShelterData() {
 		ArrayList<ShelterT> maleArray   = new ArrayList<ShelterT>();
 		ArrayList<ShelterT> femaleArray = new ArrayList<ShelterT>();
@@ -21,98 +25,57 @@ public class Read {
 		ArrayList<ShelterT> familyArray = new ArrayList<ShelterT>();
 		ArrayList<ShelterT> youthArray  = new ArrayList<ShelterT>();
 		
-		//reads 2018 data
-		try {
-			Scanner lineScanner = new Scanner(new File("data/SMIS_Daily_Occupancy_2018.csv"));
-
-			lineScanner.nextLine();
-	    	while(lineScanner.hasNextLine()) {
-			//for (int i = 0; i < 1; i++) {
-	    	    String line = lineScanner.nextLine();
-	    	    //System.out.println(line);
-	    	    
-	    	    //Data set has commas in some of it's values but there are some empty cells represented by a space
-	    	    //So to be safe we replace ", ," (An ampty cell) with random symbols so when we remove the extra commas
-	    	    //the extra cell is not deleted (if the empty cell was deleted there would be index errors)
-	    	    line = line.replaceAll(", ", " ");
-//	    	    System.out.println(line);
-	    	    String[] data = line.split(",");
-//	    	    for (int i = 0; i < data.length; i++) {
-//					System.out.print(data[i] + " | ");
-//				}
-//	    	    System.out.println();
-	    	    
-	    	    String  orgName = data[1], shelterName = data[2], address = data[3], facilityName = data[7], progName = data[8],  type = data[9];
-	    	    int occ = Integer.parseInt(data[10]), cap = Integer.parseInt(data[11]);
-	    	    String[] vals = {orgName, shelterName, facilityName, progName, address};
-	    	    
-	    	    switch (type) {
-				case "Men":
-		    	    addToList(maleArray, vals, shelterResT.MALE, occ, cap, 2018);
-					break;
-				case "Women":
-		    	    addToList(femaleArray, vals, shelterResT.FEMALE, occ, cap, 2018);
-					break;
-				case "Co-ed":
-		    	    addToList(coedArray, vals, shelterResT.COED, occ, cap, 2018);
-					break;
-				case "Families":
-		    	    addToList(familyArray, vals, shelterResT.FAMILY, occ, cap, 2018);
-					break;
-				case "Youth":
-		    	    addToList(youthArray, vals, shelterResT.YOUTH, occ, cap, 2018);
-					break;
-	    	    }
-	    	}
-	    	lineScanner.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		for (int i = 2018; i > 2016; i--) {
 		
-		//reads 2017 data
-		try {
-			Scanner lineScanner = new Scanner(new File("data/SMIS_Daily_Occupancy_2017.csv"));
+			String file = "data/SMIS_Daily_Occupancy_" + i + ".csv";
+			
+			//reads 2018 data
+			try {
+				Scanner lineScanner = new Scanner(new File(file));
 
-			lineScanner.nextLine();
-	    	while(lineScanner.hasNextLine()) {
-			//for (int i = 0; i < 1; i++) {
-	    	    String line = lineScanner.nextLine();
+				lineScanner.nextLine();
+				while(lineScanner.hasNextLine()) {
+					//for (int i = 0; i < 1; i++) {
+					String line = lineScanner.nextLine();
+					//System.out.println(line);
 	    	    
-	    	    //Data set has commas in some of it's values but there are some empty cells which result in a ",," in the line
-	    	    //So to be safe we replace ", " with a space so when we remove the extra commas
-	    	    //the extra cell is not deleted (if the empty cell was deleted there would be index errors)
-	    	    line = line.replaceAll(", ", " ");
-	    	    String[] data = line.split(",");
-//	    	    for (int i = 0; i < data.length; i++) {
-//					System.out.print(data[i] + " | ");
-//				}
-//	    	    System.out.println();
-//	    	    System.out.println(line);
-	    	    String  orgName = data[1], shelterName = data[2], address = data[3], facilityName = data[7], progName = data[8],  type = data[9];
-	    	    int occ = Integer.parseInt(data[10]), cap = Integer.parseInt(data[11]);
-	    	    String[] vals = {orgName, shelterName, facilityName, progName, address};
+					//Data set has commas in some of it's values but there are some empty cells represented by an empty string (,, in the csv)
+					//the extra cell should not be deleted so we replace ", " a comma that would be found in a cell vaule to prevent
+					//errors when splitting the string.
+					line = line.replaceAll(", ", " ");
+//	    	    	System.out.println(line);
+					String[] data = line.split(",");
+//	    	    	for (int i = 0; i < data.length; i++) {
+//						System.out.print(data[i] + " | ");
+//					}
+//	    	    	System.out.println();
 	    	    
-	    	    switch (type) {
-				case "Men":
-		    	    addToList(maleArray, vals, shelterResT.MALE, occ, cap, 2017);
-					break;
-				case "Women":
-		    	    addToList(femaleArray, vals, shelterResT.FEMALE, occ, cap, 2017);
-					break;
-				case "Co-ed":
-		    	    addToList(coedArray, vals, shelterResT.COED, occ, cap, 2017);
-					break;
-				case "Families":
-		    	    addToList(familyArray, vals, shelterResT.FAMILY, occ, cap, 2017);
-					break;
-				case "Youth":
-		    	    addToList(youthArray, vals, shelterResT.YOUTH, occ, cap, 2017);
-					break;
-	    	    }
-	    	}
-	    	lineScanner.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+					String  orgName = data[1], shelterName = data[2], address = data[3], facilityName = data[7], progName = data[8],  type = data[9];
+					int occ = Integer.parseInt(data[10]), cap = Integer.parseInt(data[11]);
+					String[] vals = {orgName, shelterName, facilityName, progName, address};
+	    	    
+					switch (type) {
+					case "Men":
+						addToList(maleArray, vals, shelterResT.MALE, occ, cap, i);
+						break;
+					case "Women":
+						addToList(femaleArray, vals, shelterResT.FEMALE, occ, cap, i);
+						break;
+					case "Co-ed":
+						addToList(coedArray, vals, shelterResT.COED, occ, cap, i);
+						break;
+					case "Families":
+						addToList(familyArray, vals, shelterResT.FAMILY, occ, cap, i);
+						break;
+					case "Youth":
+						addToList(youthArray, vals, shelterResT.YOUTH, occ, cap, i);
+						break;
+					}
+				}
+				lineScanner.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		ShelterT[][] sheltersList = new ShelterT[5][];
@@ -135,6 +98,15 @@ public class Read {
 		return sheltersList;
 	}
 
+	/*
+	 * A method used to add data to the list of shelters specified by arr
+	 * @param arr The arraylist of type ShelterT that the occupancy data for that shelter is being added to
+	 * @param vals the list of string values used to create an instance of ADT ShelterT
+	 * @param type the enumerated type that represents what type of shelter it is (male, female, coed, family, youth)
+	 * @param occ the integer value representing the occupancy data of the shelter
+	 * @param cap the integer value representing the capacity data of the shelter
+	 * @param year the year the data is from
+	 */
 	private static void addToList(ArrayList<ShelterT> arr, String[] vals, shelterResT type, int occ, int cap, int year) {
 		
 		for(ShelterT i : arr) {
@@ -149,13 +121,22 @@ public class Read {
 		arr.get(arr.size()-1).setCapOcc(occ, cap, year);
 	}
 	
+	/*
+	 * checks if the values in the parameters represent the same shelter
+	 * @param sheter a variable of type ShelterT that represents a shelter
+	 * @param vals a list of string values to check against a shelter
+	 * @return returns a boolean if the shelter and the values represent the same shelter
+	 */
 	private static boolean contains(ShelterT shelter, String[] vals) {
 		//String[] vals = {orgName, shelterName, facilityName, progName, address};
 		return shelter.getOrgName().equals(vals[0]) && shelter.getName().equals(vals[1]) && shelter.getFacilityName().equals(vals[2]) 
 				&& shelter.getProgName().equals(vals[3]) && shelter.getAddress().equals(vals[4]);
 	}
 	
-	
+	/*
+	 * A Method used to read a dataset of all the cooling centers in Toronto and create an array of CoolingCentreT
+	 * @return returns an array of type CoolingCentreT
+	 */
 	public static CoolingCentreT[] readCoolingData() {
 		
 		ArrayList<CoolingCentreT> coolingArray = new ArrayList<CoolingCentreT>();
@@ -201,6 +182,10 @@ public class Read {
 		return coolList;
 	}
 	
+	/*
+	 * Reads a dataset of all municipal address point in Toronto and returns a TST that has all the data points stored.
+	 * @return returns a TST that stores all the address points in the dataset
+	 */
 	public static TST<AddressT> readAddressData() {
 		
 		TST<AddressT> addresses = new TST<AddressT>();
