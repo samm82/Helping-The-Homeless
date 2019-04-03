@@ -41,17 +41,19 @@ public class Master {
 		
 		AddressT add;
 		for (int i = 0; i < masterArray.length; i++) {
-			for (int j = 0; j < masterArray[i].length; j++) {
-				add = addresses.get(masterArray[i][j].getAddress());
+			int count = 0;
+			for (ShelterT shel : masterArray[i]) {
+				System.out.println(shel.getAddress());
+				add = addresses.get(shel.getAddress());
 				System.out.println(add);
-				masterArray[i][j].setLat(add.getLat());
-				masterArray[i][j].setLon(add.getLon());
+				shel.setLat(add.getLat());
+				shel.setLon(add.getLon());
 				
 				// sets score for each shelter
-				masterArray[i][j].setScore(Weight.calcScore(masterArray[i][j], user));
+				shel.setScore(Weight.calcScore(shel, user));
 
-				System.out.println(i + " " + j + " "  + masterArray[i][j]);
-				System.out.println("   " + masterArray[i][j].getScore());
+				System.out.println(i + " " + count++ + " "  + shel);
+				System.out.println("   " + shel.getScore());
 
 			}
 		}
