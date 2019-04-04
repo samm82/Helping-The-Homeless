@@ -52,16 +52,16 @@ public class Read {
 	    	    
 					String  orgName = data[1], shelterName = data[2], address = data[3], facilityName = data[7], progName = data[8],  type = data[9];
 					
-					address = address.replace("Avenue", "Ave").replace("Road", "Rd").replace("Drive", "Dr").replace("Street", "St");
-					address = address.replace("Ave Toronto", "Ave").replace("Rd Toronto", "Rd").replace("Dr Toronto", "Dr").replace("St Toronto", "St");
-					address = address.replace("Ave.", "Ave").replace("Rd.", "Rd").replace("Dr.", "Dr").replace("St.", "St");
+					address = address.replace("Avenue", "Ave").replace("Ave Toronto", "Ave").replace("Ave.", "Ave");
+					address = address.replace("Drive", "Dr").replace("Dr Toronto", "Dr").replace("Dr.", "Dr");
+					if (progName.equalsIgnoreCase("Eva's Satellite")) System.out.println(address);
+					address = address.replace("Place", "Pl").replace("Pl Toronto", "Pl").replace("Pl.", "Pl");
+					address = address.replace("Road", "Rd").replace("Rd Toronto", "Rd").replace("Rd.", "Rd");
+					address = address.replace("Street", "St").replace("St Toronto", "St").replace("St.", "St");
 					address = address.replace("East", "E").replace("West", "W").replace("North", "N").replace("South", "S");
 					address = address.replace("E.", "E").replace("W.", "W").replace("N.", "N").replace("S.", "S");
 					address = address.replace("Bathrust", "Bathurst");
-					address = address.replace("17 Jarvis St", "107 Jarvis St").replace("52 Spadina Ave", "502 Spadina Ave").replace("6 Newcastle St", "60 Newcastle St");
-					address = address.replace("341 Bayview Ave", "3410 Bayview Ave").replace("288 Dundas St W", "2808 Dundas St W").replace("8 Woodlawn Ave E", "80 Woodlawn Ave E");
-					address = address.replace("265 Queens Dr", "101 Ontario St").replace("72 Kennedy Rd", "90 Shuter St"); //this could be wrong
-					address = address.replace("\"490 Sherbourne St 2nd floor\"", "490 Sherbourne St");
+					address = address.replace("265 Queens Dr", "101 Ontario St").replace("72 Kennedy Rd", "90 Shuter St"); // wrong addresses in shelter data set
 					
 					int occ = Integer.parseInt(data[10]), cap = Integer.parseInt(data[11]);
 					String[] vals = {orgName, shelterName, facilityName, progName, address};
