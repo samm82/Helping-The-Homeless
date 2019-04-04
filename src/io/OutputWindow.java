@@ -19,7 +19,9 @@ public class OutputWindow {
 
 	protected Shell shell;
 	private Text Output;
-	private String shelter_address;
+	private String[] shelter_address;
+	private Button btnBack;
+	private Button btnNext;
 
 	/**
 	 * Launch the application.
@@ -55,23 +57,33 @@ public class OutputWindow {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		shell.setSize(606, 385);
+		shell.setSize(478, 264);
 		shell.setText("SWT Application");
 		
-		Output = new Text(shell, SWT.BORDER);
+		Output = new Text(shell, SWT.WRAP | SWT.MULTI);
 		Output.setEnabled(false);
 		Output.setEditable(false);
 		Output.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		Output.setBounds(10, 10, 568, 286);
-		Output.setText("32 Springbrook gdns, Toronto, ON");//////////////////////////////////////////////////////////////////////////////////////////////////////
+		Output.setBounds(111, 10, 241, 157);
+		Output.setText("\t\t\tScott Mission" + "\n");			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		Output.append("\tSocial services organization" + "\n\n");//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		Output.append("502 Spadina Ave, Toronto, ON" + "\n");	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		Output.append("Historical Occupancy: 50" + "\n");		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		Output.append("Capacity: 150" + "\n");					//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		Output.append("Male Only");								//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+
 		
 		Button btnOpenShelterIn = new Button(shell, SWT.NONE);
 		btnOpenShelterIn.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				shelter_address = Output.getText();
-				shelter_address = shelter_address.replace(" ", "+");
-				String url = "https://www.google.ca/maps/dir/" + "Downtown+Toronto/" + shelter_address;
+				String temp = Output.getText();
+				shelter_address = temp.split("\n");
+				temp = shelter_address[3].replace(" ", "+");
+				temp = temp.trim();
+				System.out.println(shelter_address[2]);
+				String url = "https://www.google.ca/maps/dir/" + "27+Kings+college+rd,+Toronto,+ON/" + temp + "/";
 
 		        if(Desktop.isDesktopSupported()){
 		            Desktop desktop = Desktop.getDesktop();
@@ -92,8 +104,37 @@ public class OutputWindow {
 		        }
 			}
 		});
-		btnOpenShelterIn.setBounds(10, 302, 568, 30);
+		btnOpenShelterIn.setBounds(10, 177, 435, 30);
 		btnOpenShelterIn.setText("Open Shelter In Google Maps");
+		
+		btnBack = new Button(shell, SWT.NONE);
+		btnBack.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shell.dispose();
+				MainWindow MainWindow = new MainWindow();
+				MainWindow.open();
+				
+			}
+		});
+		btnBack.setBounds(10, 10, 45, 157);
+		btnBack.setText("Back");
+		
+		btnNext = new Button(shell, SWT.NONE);
+		btnNext.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Output.setText("");
+				Output.setText("\t  Covenant House Toronto" + "\n");	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				Output.append("\tSocial services organization" + "\n\n");//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				Output.append("20 Gerrard St E, Toronto, ON" + "\n");	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				Output.append("Historical Occupancy: 75" + "\n");		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				Output.append("Capacity: 200" + "\n");					//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				Output.append("Coed");									//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			}
+		});
+		btnNext.setBounds(400, 10, 45, 157);
+		btnNext.setText("Next");
 
 	}
 
