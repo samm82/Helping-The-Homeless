@@ -43,10 +43,10 @@ public class Master {
 		for (int i = 0; i < masterArray.length; i++) {
 			int count = 0;
 			for (ShelterT shel : masterArray[i]) {
-//				System.out.println(shel.getProgName());
-//				System.out.println(shel.getAddress());
+				System.out.println(shel.getProgName());
+				System.out.println(shel.getAddress());
 				add = addresses.get(shel.getAddress());
-//				System.out.println(add.getNum() + " " + add.getSt());
+				System.out.println(add.getNum() + " " + add.getSt());
 				shel.setLat(add.getLat());
 				shel.setLon(add.getLon());
 				
