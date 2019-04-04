@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -81,7 +82,7 @@ public class FindShelter {
 		shell.setLayout(null);
 		
 		Label lblHereAreYour = new Label(shell, SWT.NONE);
-		lblHereAreYour.setBounds(10, 10, 630, 33);
+		lblHereAreYour.setBounds(106, 11, 477, 33);
 		lblHereAreYour.setFont(SWTResourceManager.getFont("Times New Roman", 14, SWT.BOLD));
 		lblHereAreYour.setAlignment(SWT.CENTER);
 		lblHereAreYour.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -176,26 +177,37 @@ public class FindShelter {
 		btnFindShelter.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				add = address.getText().replace(" ", "+");
 				_address_ = address.getText();
-		        String url = "https://www.google.ca/maps/dir/" + add + "/Downtown+Toronto";
-
-		        if (Desktop.isDesktopSupported()) {
-		            Desktop desktop = Desktop.getDesktop();
-		            try {
-		                desktop.browse(new URI(url));
-		            } catch (IOException | URISyntaxException e1) {
-		                // TODO Auto-generated catch block
-		                e1.printStackTrace();
-		            }
-		        } else {
-		            Runtime runtime = Runtime.getRuntime();
-		            try {
-		                runtime.exec("xdg-open " + url);
-		            } catch (IOException e1) {
-		                // TODO Auto-generated catch block
-		                e1.printStackTrace();
-		            }
+//				add = address.getText().replace(" ", "+");
+//		        String url = "https://www.google.ca/maps/dir/" + add + "/Downtown+Toronto";
+//
+//		        if (Desktop.isDesktopSupported()) {
+//		            Desktop desktop = Desktop.getDesktop();
+//		            try {
+//		                desktop.browse(new URI(url));
+//		            } catch (IOException | URISyntaxException e1) {
+//		                // TODO Auto-generated catch block
+//		                e1.printStackTrace();
+//		            }
+//		        } else {
+//		            Runtime runtime = Runtime.getRuntime();
+//		            try {
+//		                runtime.exec("xdg-open " + url);
+//		            } catch (IOException e1) {
+//		                // TODO Auto-generated catch block
+//		                e1.printStackTrace();
+//		            }
+//		        }
+		        if(address.getText().equals("")) {
+			        MessageBox dialog = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
+					dialog.setText("ERROR");
+					dialog.setMessage("Please enter a valid address");
+					dialog.open();
+		        }
+		        else {
+			        shell.dispose();
+					OutputWindow OutputWindow = new OutputWindow();
+					OutputWindow.open();
 		        }
 			}
 		});
@@ -209,6 +221,18 @@ public class FindShelter {
 		
 		address = new Text(shell, SWT.BORDER);
 		address.setBounds(10, 76, 630, 26);
+		
+		Button btnBack = new Button(shell, SWT.NONE);
+		btnBack.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shell.dispose();
+				MainWindow MainWindow = new MainWindow();
+				MainWindow.open();
+			}
+		});
+		btnBack.setBounds(10, 10, 90, 30);
+		btnBack.setText("Back");
 	}
 	
 	public UserResT getUserType() {		
