@@ -53,6 +53,7 @@ public class Read {
 					String  orgName = data[1], shelterName = data[2], address = data[3], facilityName = data[7], progName = data[8],  type = data[9];
 					
 					address = address.replace("Avenue", "Ave").replace("Ave Toronto", "Ave").replace("Ave.", "Ave");
+					address = address.replace("Court", "Crt").replace("Crt Toronto", "Crt").replace("Crt.", "Crt");
 					address = address.replace("Drive", "Dr").replace("Dr Toronto", "Dr").replace("Dr.", "Dr");
 					address = address.replace("Place", "Pl").replace("Pl Toronto", "Pl").replace("Pl.", "Pl");
 					address = address.replace("Road", "Rd").replace("Rd Toronto", "Rd").replace("Rd.", "Rd");
