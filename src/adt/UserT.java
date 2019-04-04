@@ -20,7 +20,7 @@ public class UserT {
 		this.lon = lon;
 	}
 	
-	//public UserResT getResType() { return resType; }
+	public UserResT getResType() { return resType; }
 	
 	public boolean isFamily() { return (resType == UserResT.FAMILY); }
 	
