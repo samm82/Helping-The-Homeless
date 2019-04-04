@@ -44,19 +44,11 @@ public class Weight {
 	public static double calcDist(LocationT loc, UserT user) {
 		double latS = loc.getLat(), latU = user.getLat();
 		double lonS = loc.getLon(), lonU = user.getLon();
-		
-//		double latDiff = Math.toRadians(Math.abs(latS - latU));
-//		double lonDiff = Math.toRadians(Math.abs(lonS - lonU));
-//		
-//		double a = Math.sin(latDiff/2) * Math.sin(latDiff/2) + 
-//				   Math.cos(Math.toRadians(latS)) * Math.cos(Math.toRadians(latU)) *
-//				   Math.sin(lonDiff/2) * Math.sin(lonDiff/2);
-//		return (12742 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
-		
+
 		// a simplified calculation since Toronto is relatively flat
 		// from https://stackoverflow.com/questions/1664799/calculating-distance-between-two-points-using-pythagorean-theorem
-		double d_ew = (lonS - lonU) * Math.cos(Math.toRadians(latU));
-		double d_ns = (latS - latU);
+		double d_ew = 111.320 * (lonS - lonU) * Math.cos(Math.toRadians(latU));
+		double d_ns = 110.574 * (latS - latU);
 		
 		return Math.sqrt(d_ew * d_ew + d_ns * d_ns);
 	}

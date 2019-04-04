@@ -88,12 +88,17 @@ public class Master {
 			break;
 		}
 		
+		
+		
+		
 		System.out.print("The best cooling centre is: ");
 		System.out.println(coolPQ.delMax().getName());
 		
 	}
 	
-	private static String printBestShel(MaxPQ<ShelterT> pq) { return pq.delMax().getName(); }
+	private static String printBestShel(MaxPQ<ShelterT> pq) { 
+		return pq.delMax().getName(); 
+		}
 	
 	private static String printBestShel(MaxPQ<ShelterT> pq1, MaxPQ<ShelterT> pq2) {
 		if (pq1.max().getScore() > pq2.max().getScore()) return pq1.delMax().getName(); 
