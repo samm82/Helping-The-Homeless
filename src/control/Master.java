@@ -25,8 +25,8 @@ public class Master {
 		// opens GUI
 		try {
 		MainWindow window = new MainWindow();
-		info = window.open();
-//		System.out.println(info);
+		window.open();
+
 		
 		addresses = Read.readAddressData();
 		

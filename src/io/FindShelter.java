@@ -20,7 +20,9 @@ import org.eclipse.swt.widgets.Text;
 
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import adt.ShelterT;
 import adt.UserInputT;
+import adt.ShelterT.shelterResT;
 import adt.UserT.UserResT;
 
 public class FindShelter {
@@ -35,6 +37,7 @@ public class FindShelter {
 	private Text address;
 	private String add;
 	private String _address_;
+	private ShelterT[] Shelters = new ShelterT[5];
 	
 	/**
 	 * Launch the application.
@@ -205,9 +208,11 @@ public class FindShelter {
 					dialog.open();
 		        }
 		        else {
+		        	
+		        	Shelters[0] = new ShelterT(shelterResT.MALE, "Social services organization", "Scott Mission", "bob", "chris", "502 Spadina Ave");
 			        shell.dispose();
 					OutputWindow OutputWindow = new OutputWindow();
-					OutputWindow.open();
+					OutputWindow.open(Shelters);
 		        }
 			}
 		});

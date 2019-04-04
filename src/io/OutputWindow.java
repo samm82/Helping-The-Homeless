@@ -11,6 +11,9 @@ import java.net.URISyntaxException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import adt.ShelterT;
+
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -22,15 +25,17 @@ public class OutputWindow {
 	private String[] shelter_address;
 	private Button btnBack;
 	private Button btnNext;
+	private static ShelterT [] Shelters = new ShelterT[5];
 
 	/**
 	 * Launch the application.
 	 * @param args
+	 * @wbp.parser.entryPoint
 	 */
 	public static void main(String[] args) {
 		try {
 			OutputWindow window = new OutputWindow();
-			window.open();
+			window.open(Shelters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,9 +43,11 @@ public class OutputWindow {
 
 	/**
 	 * Open the window.
+	 * @wbp.parser.entryPoint
 	 */
-	public void open() {
+	public void open(ShelterT [] s) {
 		Display display = Display.getDefault();
+		Shelters[0] = s[0];
 		createContents();
 		shell.open();
 		shell.layout();
@@ -65,13 +72,13 @@ public class OutputWindow {
 		Output.setEditable(false);
 		Output.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Output.setBounds(111, 10, 241, 157);
-		Output.setText("\t\t\tScott Mission" + "\n");			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		Output.append("\tSocial services organization" + "\n\n");//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		Output.append("502 Spadina Ave, Toronto, ON" + "\n");	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		Output.append("Historical Occupancy: 50" + "\n");		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		Output.append("Capacity: 150" + "\n");					//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		Output.append("Male Only");								//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+		System.out.print(Shelters[0].getName());
+		Output.setText("\t\t\t" + Shelters[0].getName() + "\n");			
+		Output.append("\t" + Shelters[0].getOrgName() + "\n\n");
+		Output.append(Shelters[0].getAddress() + "\n");	
+		Output.append("Historical Occupancy: " + Shelters[0].getOcc2018(0) + "\n");		
+		Output.append("Capacity: " + Shelters[0].getCap2018(0) + "\n");					
+		Output.append(Shelters[0].getTypeString());								
 
 		
 		Button btnOpenShelterIn = new Button(shell, SWT.NONE);

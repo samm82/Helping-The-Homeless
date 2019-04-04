@@ -44,6 +44,24 @@ public class ShelterT extends LocationT {
 		return this.type;
 	}
 	
+	public String getTypeString() {
+		switch (getType()) {
+		case MALE:
+			return "Male";
+		case FEMALE:
+			return "Female";		
+		case COED:
+			return "Coed";
+		case FAMILY:
+			return "Family";
+		case YOUTH:
+			return "Youth";
+		default:
+			return "Error";
+		}
+		
+	}
+	
 	public String getOrgName() {
 		return this.orgName;
 	}
