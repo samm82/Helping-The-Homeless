@@ -81,7 +81,7 @@ public class FindShelter {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		shell.setSize(668, 301);
+		shell.setSize(668, 315);
 		shell.setText("Best Shelter");
 		shell.scroll(0, 0, 0, 0, 5, 5, true);
 		shell.setLayout(null);
@@ -182,6 +182,10 @@ public class FindShelter {
 		btnFindShelter.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				Label lblLoading = new Label(shell, SWT.NONE);
+				lblLoading.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+				lblLoading.setBounds(10, 233, 70, 20);
+				lblLoading.setText("Calculating Best Shelter...");
 				_address_ = address.getText();
 		        if(address.getText().equals("")) {
 			        MessageBox dialog = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
@@ -253,7 +257,7 @@ public class FindShelter {
 		        	
 			        shell.dispose();
 					OutputWindow OutputWindow = new OutputWindow();
-					OutputWindow.open(shelPQ);
+					OutputWindow.open(shelPQ, _address_);
 		        }
 			}
 		});
@@ -279,6 +283,7 @@ public class FindShelter {
 		});
 		btnBack.setBounds(10, 10, 90, 30);
 		btnBack.setText("Back");
+		
 	}
 	
 	public UserResT getUserType() {		

@@ -28,6 +28,7 @@ public class OutputWindow {
 	private Button btnBack;
 	private Button btnNext;
 	private static MaxPQ<ShelterT> Shelters;
+	private static String address;
 
 	/**
 	 * Launch the application.
@@ -37,7 +38,7 @@ public class OutputWindow {
 	public static void main(String[] args) {
 		try {
 			OutputWindow window = new OutputWindow();
-			window.open(Shelters);
+			window.open(Shelters, address);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,9 +48,10 @@ public class OutputWindow {
 	 * Open the window.
 	 * @wbp.parser.entryPoint
 	 */
-	public void open(MaxPQ<ShelterT> shelPQ) {
+	public void open(MaxPQ<ShelterT> shelPQ, String add) {
 		Display display = Display.getDefault();
 		Shelters = shelPQ;
+		address = add;
 		createContents();
 		shell.open();
 		shell.layout();
@@ -96,8 +98,13 @@ public class OutputWindow {
 				shelter_address = temp.split("\n");
 				temp = shelter_address[3].replace(" ", "+");
 				temp = temp.trim();
-				System.out.println(shelter_address[2]);
-				String url = "https://www.google.ca/maps/dir/" + "27+Kings+college+rd,+Toronto,+ON/" + temp + "/";
+				
+				address = address.replace(" ", "+");
+				address = address.trim();
+
+//				System.out.println(shelter_address[2]);
+				
+				String url = "https://www.google.ca/maps/dir/" + address + "+Toronto,+ON/" + temp + "/";
 
 		        if(Desktop.isDesktopSupported()){
 		            Desktop desktop = Desktop.getDesktop();
