@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 
@@ -20,10 +21,16 @@ import org.eclipse.swt.widgets.Text;
 
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import adt.AddressT;
+import adt.CoolingCentreT;
 import adt.ShelterT;
 import adt.UserInputT;
+import adt.UserT;
 import adt.ShelterT.shelterResT;
 import adt.UserT.UserResT;
+import algsstructs.MaxPQ;
+import algsstructs.TST;
+import process.Weight;
 
 public class FindShelter {
 
@@ -55,7 +62,7 @@ public class FindShelter {
 	/**
 	 * Open the window.
 	 */
-	public UserInputT open() {
+	public void open() {
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
@@ -70,7 +77,6 @@ public class FindShelter {
 			add  = _address_;
 		}
 		info = new UserInputT(type, add);
-		return info;
 	}
 
 	/**
@@ -181,26 +187,6 @@ public class FindShelter {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				_address_ = address.getText();
-//				add = address.getText().replace(" ", "+");
-//		        String url = "https://www.google.ca/maps/dir/" + add + "/Downtown+Toronto";
-//
-//		        if (Desktop.isDesktopSupported()) {
-//		            Desktop desktop = Desktop.getDesktop();
-//		            try {
-//		                desktop.browse(new URI(url));
-//		            } catch (IOException | URISyntaxException e1) {
-//		                // TODO Auto-generated catch block
-//		                e1.printStackTrace();
-//		            }
-//		        } else {
-//		            Runtime runtime = Runtime.getRuntime();
-//		            try {
-//		                runtime.exec("xdg-open " + url);
-//		            } catch (IOException e1) {
-//		                // TODO Auto-generated catch block
-//		                e1.printStackTrace();
-//		            }
-//		        }
 		        if(address.getText().equals("")) {
 			        MessageBox dialog = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
 					dialog.setText("ERROR");
@@ -208,11 +194,63 @@ public class FindShelter {
 					dialog.open();
 		        }
 		        else {
+		    		// creates a 2d array of all shelters
+		    		ShelterT[][] masterArray = Read.readShelterData();
+		    		
+		    		// creates TST of addresses
+		        	TST<AddressT> addresses = Read.readAddressData();
+					
+					String add = info.getAdd();
+					UserT user = new UserT(info.getType(), addresses.get(add).getLat(), addresses.get(add).getLon());
 		        	
-		        	Shelters[0] = new ShelterT(shelterResT.MALE, "Social services organization", "Scott Mission", "bob", "chris", "502 Spadina Ave");
+					AddressT shelAdd;
+					for (int i = 0; i < masterArray.length; i++) {
+						for (ShelterT shel : masterArray[i]) {
+							shelAdd = addresses.get(shel.getAddress());
+							shel.setLat(shelAdd.getLat());
+							shel.setLon(shelAdd.getLon());
+							
+							// sets score for each shelter
+							shel.setScore(Weight.calcScore(shel, user));
+						}
+					}
+					
+					MaxPQ<ShelterT> shelPQ;
+					
+					switch (user.getResType()) {		
+					case MALE_ONLY:
+						shelPQ = new MaxPQ<ShelterT>(masterArray[0]);
+						break;
+					case MALE_COED:
+						shelPQ = new MaxPQ<ShelterT>(concatenate(masterArray[0], masterArray[2]));
+						break;
+					case FEMALE_ONLY:
+						shelPQ = new MaxPQ<ShelterT>(masterArray[1]);
+						break;
+					case FEMALE_COED:
+						shelPQ = new MaxPQ<ShelterT>(concatenate(masterArray[1], masterArray[2]));
+						break;
+					case FAMILY:
+						shelPQ = new MaxPQ<ShelterT>(masterArray[3]);
+						break;
+					case YOUTH:
+						shelPQ = new MaxPQ<ShelterT>(masterArray[4]);
+						break;
+					}
+								
+//					// creates a 1d array of all cooling centres
+//					CoolingCentreT[] cool = Read.readCoolingData();
+//					
+//					for (int i = 0; i < cool.length; i++) {
+//						// sets score for each cooling centre
+//						cool[i].setScore(Weight.calcScore(cool[i], user));
+//					}
+//					
+//					MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
+		        	
 			        shell.dispose();
 					OutputWindow OutputWindow = new OutputWindow();
-					OutputWindow.open(Shelters);
+					OutputWindow.open(shelPQ);
 		        }
 			}
 		});
@@ -250,6 +288,18 @@ public class FindShelter {
 			if  (male)   return UserResT.MALE_ONLY;
 			else         return UserResT.FEMALE_ONLY;
 		}
+	}
+	
+	private ShelterT[] concatenate(ShelterT[] a, ShelterT[] b) {	    
+	    ArrayList<ShelterT> c = new ArrayList<ShelterT>();
+	    
+	    for (ShelterT s : a) c.add(s);
+	    for (ShelterT s : b) c.add(s);
+	    	    
+	    ShelterT[] cArray = new ShelterT[c.size()];
+	    cArray = c.toArray(cArray);
+	    
+	    return cArray;
 	}
 	
 	public String getAddress() {

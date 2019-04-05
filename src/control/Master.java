@@ -26,12 +26,6 @@ public class Master {
 		try {
 		MainWindow window = new MainWindow();
 		window.open();
-
-		
-		addresses = Read.readAddressData();
-		
-		String add = info.getAdd();
-		user = new UserT(info.getType(), addresses.get(add).getLat(), addresses.get(add).getLon());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
