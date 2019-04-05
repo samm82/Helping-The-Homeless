@@ -8,6 +8,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Calendar;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -74,13 +75,16 @@ public class OutputWindow {
 		Output.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Output.setBounds(111, 10, 241, 157);
 		
+		Calendar calendar = Calendar.getInstance();
+		int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
+		
 		ShelterT best = Shelters.delMax();
-		System.out.print(best.getName());
-		Output.setText("\t\t\t" + best.getName() + "\n");			
-		Output.append("\t" + best.getOrgName() + "\n\n");
+		System.out.println(best.getName());
+		Output.setText(best.getName() + "\n");			
+		Output.append(best.getOrgName() + "\n\n");
 		Output.append(best.getAddress() + ", Toronto, ON\n");	
-		Output.append("Historical Occupancy: " + best.getOcc2018(0) + "\n");		
-		Output.append("Capacity: " + best.getCap2018(0) + "\n");					
+		Output.append("Historical Occupancy: " + best.getOcc2018(dayIndex) + "\n");		
+		Output.append("Capacity: " + best.getCap2018(dayIndex) + "\n");					
 		Output.append(best.getTypeString());								
 
 		
@@ -134,13 +138,14 @@ public class OutputWindow {
 		btnNext.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Output.setText("");
-				Output.setText("\t  Covenant House Toronto" + "\n");	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				Output.append("\tSocial services organization" + "\n\n");//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				Output.append("20 Gerrard St E, Toronto, ON" + "\n");	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				Output.append("Historical Occupancy: 75" + "\n");		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				Output.append("Capacity: 200" + "\n");					//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				Output.append("Coed");									//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				ShelterT best = Shelters.delMax();
+				System.out.println(best.getName());
+				Output.setText(best.getName() + "\n");			
+				Output.append(best.getOrgName() + "\n\n");
+				Output.append(best.getAddress() + ", Toronto, ON\n");	
+				Output.append("Historical Occupancy: " + best.getOcc2018(dayIndex) + "\n");		
+				Output.append("Capacity: " + best.getCap2018(dayIndex) + "\n");					
+				Output.append(best.getTypeString());
 			}
 		});
 		btnNext.setBounds(400, 10, 45, 157);
