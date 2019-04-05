@@ -75,9 +75,9 @@ public class OutputWindow {
 		System.out.print(Shelters[0].getName());
 		Output.setText("\t\t\t" + Shelters[0].getName() + "\n");			
 		Output.append("\t" + Shelters[0].getOrgName() + "\n\n");
-		Output.append(Shelters[0].getAddress() + "\n");	
-		Output.append("Historical Occupancy: " + Shelters[0].getOcc2018(0) + "\n");		
-		Output.append("Capacity: " + Shelters[0].getCap2018(0) + "\n");					
+		Output.append(Shelters[0].getAddress() + ", Toronto, ON\n");	
+		Output.append("Historical Occupancy: 15" + Shelters[0].getOcc2018(0) + "\n");		
+		Output.append("Capacity: 5" + Shelters[0].getCap2018(0) + "\n");					
 		Output.append(Shelters[0].getTypeString());								
 
 		

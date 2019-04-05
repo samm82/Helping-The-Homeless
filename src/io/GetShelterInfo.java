@@ -83,9 +83,9 @@ public class GetShelterInfo {
 				}
 				else if(ShelterAddress.getText().equals("")) {
 					// Use Shelter Name Value
-					shell.dispose();
-					OutputWindow OutputWindow = new OutputWindow();
-					OutputWindow.open();
+//					shell.dispose();
+//					OutputWindow OutputWindow = new OutputWindow();
+//					OutputWindow.open();
 //					OutputWindow.shell.setText(ShelterName.getText());
 				}
 				else if(ShelterName.getText().equals("")) {

@@ -80,9 +80,9 @@ public class MainWindow {
 		btnFindNearestCooling.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-		        shell.dispose();
-				OutputWindow OutputWindow = new OutputWindow();
-				OutputWindow.open();
+//		        shell.dispose();
+//				OutputWindow OutputWindow = new OutputWindow();
+//				OutputWindow.open();
 			}
 		});
 		btnFindNearestCooling.setBounds(10, 135, 356, 30);
