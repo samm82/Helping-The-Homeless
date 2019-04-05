@@ -13,6 +13,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import adt.ShelterT;
+import algsstructs.MaxPQ;
 
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -25,7 +26,7 @@ public class OutputWindow {
 	private String[] shelter_address;
 	private Button btnBack;
 	private Button btnNext;
-	private static ShelterT [] Shelters = new ShelterT[5];
+	private static MaxPQ<ShelterT> Shelters;
 
 	/**
 	 * Launch the application.
@@ -45,9 +46,9 @@ public class OutputWindow {
 	 * Open the window.
 	 * @wbp.parser.entryPoint
 	 */
-	public void open(ShelterT [] s) {
+	public void open(MaxPQ<ShelterT> shelPQ) {
 		Display display = Display.getDefault();
-		Shelters[0] = s[0];
+		Shelters = shelPQ;
 		createContents();
 		shell.open();
 		shell.layout();
@@ -72,13 +73,15 @@ public class OutputWindow {
 		Output.setEditable(false);
 		Output.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Output.setBounds(111, 10, 241, 157);
-		System.out.print(Shelters[0].getName());
-		Output.setText("\t\t\t" + Shelters[0].getName() + "\n");			
-		Output.append("\t" + Shelters[0].getOrgName() + "\n\n");
-		Output.append(Shelters[0].getAddress() + ", Toronto, ON\n");	
-		Output.append("Historical Occupancy: 15" + Shelters[0].getOcc2018(0) + "\n");		
-		Output.append("Capacity: 5" + Shelters[0].getCap2018(0) + "\n");					
-		Output.append(Shelters[0].getTypeString());								
+		
+		ShelterT best = Shelters.delMax();
+		System.out.print(best.getName());
+		Output.setText("\t\t\t" + best.getName() + "\n");			
+		Output.append("\t" + best.getOrgName() + "\n\n");
+		Output.append(best.getAddress() + ", Toronto, ON\n");	
+		Output.append("Historical Occupancy: 15" + best.getOcc2018(0) + "\n");		
+		Output.append("Capacity: 5" + best.getCap2018(0) + "\n");					
+		Output.append(best.getTypeString());								
 
 		
 		Button btnOpenShelterIn = new Button(shell, SWT.NONE);

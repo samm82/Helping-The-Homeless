@@ -44,7 +44,7 @@ public class FindShelter {
 	private Text address;
 	private String add;
 	private String _address_;
-	private ShelterT[] Shelters = new ShelterT[5];
+	private MaxPQ<ShelterT> Shelters;
 	
 	/**
 	 * Launch the application.
@@ -214,27 +214,25 @@ public class FindShelter {
 							shel.setScore(Weight.calcScore(shel, user));
 						}
 					}
-					
-					MaxPQ<ShelterT> shelPQ;
-					
+										
 					switch (user.getResType()) {		
 					case MALE_ONLY:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[0]);
+						Shelters = new MaxPQ<ShelterT>(masterArray[0]);
 						break;
 					case MALE_COED:
-						shelPQ = new MaxPQ<ShelterT>(concatenate(masterArray[0], masterArray[2]));
+						Shelters = new MaxPQ<ShelterT>(concatenate(masterArray[0], masterArray[2]));
 						break;
 					case FEMALE_ONLY:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[1]);
+						Shelters = new MaxPQ<ShelterT>(masterArray[1]);
 						break;
 					case FEMALE_COED:
-						shelPQ = new MaxPQ<ShelterT>(concatenate(masterArray[1], masterArray[2]));
+						Shelters = new MaxPQ<ShelterT>(concatenate(masterArray[1], masterArray[2]));
 						break;
 					case FAMILY:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[3]);
+						Shelters = new MaxPQ<ShelterT>(masterArray[3]);
 						break;
 					case YOUTH:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[4]);
+						Shelters = new MaxPQ<ShelterT>(masterArray[4]);
 						break;
 					}
 								
@@ -252,7 +250,7 @@ public class FindShelter {
 		        	
 			        shell.dispose();
 					OutputWindow OutputWindow = new OutputWindow();
-					OutputWindow.open(shelPQ);
+					OutputWindow.open(Shelters);
 		        }
 			}
 		});
