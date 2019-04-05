@@ -44,7 +44,7 @@ public class FindShelter {
 	private Text address;
 	private String add;
 	private String _address_;
-	private MaxPQ<ShelterT> Shelters;
+	private ShelterT[] Shelters = new ShelterT[5];
 	
 	/**
 	 * Launch the application.
@@ -67,16 +67,12 @@ public class FindShelter {
 		createContents();
 		shell.open();
 		shell.layout();
-		UserResT type = getUserType();
-		String   add  = _address_;
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
-			type = getUserType();
-			add  = _address_;
 		}
-		info = new UserInputT(type, add);
+		
 	}
 
 	/**
@@ -194,6 +190,8 @@ public class FindShelter {
 					dialog.open();
 		        }
 		        else {
+		        	UserResT type = getUserType();
+		        	info = new UserInputT(type, _address_);
 		    		// creates a 2d array of all shelters
 		    		ShelterT[][] masterArray = Read.readShelterData();
 		    		
@@ -214,25 +212,30 @@ public class FindShelter {
 							shel.setScore(Weight.calcScore(shel, user));
 						}
 					}
-										
+					
+					MaxPQ<ShelterT> shelPQ;
+					
 					switch (user.getResType()) {		
 					case MALE_ONLY:
-						Shelters = new MaxPQ<ShelterT>(masterArray[0]);
+						shelPQ = new MaxPQ<ShelterT>(masterArray[0]);
 						break;
 					case MALE_COED:
-						Shelters = new MaxPQ<ShelterT>(concatenate(masterArray[0], masterArray[2]));
+						shelPQ = new MaxPQ<ShelterT>(concatenate(masterArray[0], masterArray[2]));
 						break;
 					case FEMALE_ONLY:
-						Shelters = new MaxPQ<ShelterT>(masterArray[1]);
+						shelPQ = new MaxPQ<ShelterT>(masterArray[1]);
 						break;
 					case FEMALE_COED:
-						Shelters = new MaxPQ<ShelterT>(concatenate(masterArray[1], masterArray[2]));
+						shelPQ = new MaxPQ<ShelterT>(concatenate(masterArray[1], masterArray[2]));
 						break;
 					case FAMILY:
-						Shelters = new MaxPQ<ShelterT>(masterArray[3]);
+						shelPQ = new MaxPQ<ShelterT>(masterArray[3]);
 						break;
 					case YOUTH:
-						Shelters = new MaxPQ<ShelterT>(masterArray[4]);
+						shelPQ = new MaxPQ<ShelterT>(masterArray[4]);
+						break;
+					default:
+						shelPQ = new MaxPQ<ShelterT>(masterArray[0]);
 						break;
 					}
 								
@@ -250,7 +253,7 @@ public class FindShelter {
 		        	
 			        shell.dispose();
 					OutputWindow OutputWindow = new OutputWindow();
-					OutputWindow.open(Shelters);
+					OutputWindow.open(shelPQ);
 		        }
 			}
 		});

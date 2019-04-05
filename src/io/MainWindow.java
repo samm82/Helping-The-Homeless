@@ -12,8 +12,6 @@ import adt.UserInputT;
 
 public class MainWindow {
 	
-	private UserInputT info;
-
 	protected Shell shell;
 
 	/**
@@ -58,7 +56,7 @@ public class MainWindow {
 			public void widgetSelected(SelectionEvent e) {
 				shell.dispose();
 				FindShelter FindShelter = new FindShelter();
-				info = FindShelter.open();
+				FindShelter.open();
 			}
 		});
 		btnFindShelter.setBounds(10, 24, 356, 30);

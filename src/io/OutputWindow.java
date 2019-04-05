@@ -79,8 +79,8 @@ public class OutputWindow {
 		Output.setText("\t\t\t" + best.getName() + "\n");			
 		Output.append("\t" + best.getOrgName() + "\n\n");
 		Output.append(best.getAddress() + ", Toronto, ON\n");	
-		Output.append("Historical Occupancy: 15" + best.getOcc2018(0) + "\n");		
-		Output.append("Capacity: 5" + best.getCap2018(0) + "\n");					
+		Output.append("Historical Occupancy: " + best.getOcc2018(0) + "\n");		
+		Output.append("Capacity: " + best.getCap2018(0) + "\n");					
 		Output.append(best.getTypeString());								
 
 		
