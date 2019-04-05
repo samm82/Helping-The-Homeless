@@ -247,6 +247,8 @@ public class FindShelter {
 //					}
 //					
 //					MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
+//					
+//					System.out.println(coolPQ.delMax().getName());
 		        	
 			        shell.dispose();
 					OutputWindow OutputWindow = new OutputWindow();
