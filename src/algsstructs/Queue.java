@@ -9,6 +9,12 @@ package algsstructs;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Class to implement a queue data structure
+ * @author Robert Sedgewick and Kevin Wayne
+ *
+ * @param <Item> The type of elements
+ */
 public class Queue<Item> implements Iterable<Item> {
     private Node<Item> first;    // beginning of queue
     private Node<Item> last;     // end of queue
