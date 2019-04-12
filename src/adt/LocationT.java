@@ -141,7 +141,7 @@ public class LocationT implements Comparable<LocationT> {
 	/**
 	 * Compares two locations by their score
 	 * 
-	 * @param LocationT
+	 * @param that An instance of LocationT
 	 * @return Int after comparison
 	 */
 	@Override
