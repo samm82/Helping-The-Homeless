@@ -87,7 +87,7 @@ public class Weight {
 		int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
 		if (loc.getLocType() == locTypeT.SHELTER) {
 			ShelterT shel = (ShelterT) loc;
-			if ((!(shel.isValidType(user) && shel.isValidCap(dayIndex))) || shel.isFull(dayIndex)) {
+			if (!(shel.isValidType(user) && shel.isValidCap(dayIndex))) {
 				return 0.0;
 			} else {
 //				System.out.println("   " + weightDist(calcDist(loc, user)));
