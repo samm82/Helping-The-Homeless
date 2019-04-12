@@ -1,9 +1,5 @@
 package io;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
@@ -22,11 +18,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import adt.AddressT;
-import adt.CoolingCentreT;
+//import adt.CoolingCentreT;
 import adt.ShelterT;
-import adt.UserInputT;
 import adt.UserT;
-import adt.ShelterT.shelterResT;
 import adt.UserT.UserResT;
 import algsstructs.MaxPQ;
 import algsstructs.TST;
@@ -34,7 +28,6 @@ import process.Weight;
 
 public class FindShelter {
 
-	private UserInputT info;
 	
 	protected Shell shell;
 	private boolean male;
@@ -42,9 +35,7 @@ public class FindShelter {
 	private boolean family;
 	private boolean CoEd;
 	private Text address;
-	private String add;
 	private String _address_;
-	private ShelterT[] Shelters = new ShelterT[5];
 	
 	/**
 	 * Launch the application.
@@ -195,16 +186,14 @@ public class FindShelter {
 		        }
 		        else {
 		        	UserResT type = getUserType();
-		        	info = new UserInputT(type, _address_);
 		    		// creates a 2d array of all shelters
 		    		ShelterT[][] masterArray = Read.readShelterData();
 		    		
 		    		// creates TST of addresses
 		        	TST<AddressT> addresses = Read.readAddressData();
 					
-					String add = info.getAdd();
-					UserT user = new UserT(info.getType(), addresses.get(add).getLat(), addresses.get(add).getLon());
-		        	
+					UserT user = new UserT(type, addresses.get(_address_).getLat(), addresses.get(_address_).getLon());
+		        						
 					AddressT shelAdd;
 					for (int i = 0; i < masterArray.length; i++) {
 						for (ShelterT shel : masterArray[i]) {

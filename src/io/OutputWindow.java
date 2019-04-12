@@ -30,11 +30,10 @@ public class OutputWindow {
 	private static MaxPQ<ShelterT> Shelters;
 	private static String address;
 
-	/**
-	 * Launch the application.
-	 * @param args
-	 * @wbp.parser.entryPoint
-	 */
+	
+	 // Launch the application.
+	 // @param args
+	 // @wbp.parser.entryPoint
 	public static void main(String[] args) {
 		try {
 			OutputWindow window = new OutputWindow();
@@ -43,11 +42,9 @@ public class OutputWindow {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Open the window.
-	 * @wbp.parser.entryPoint
-	 */
+	
+	 // Open the window.
+	 // @wbp.parser.entryPoint
 	public void open(MaxPQ<ShelterT> shelPQ, String add) {
 		Display display = Display.getDefault();
 		Shelters = shelPQ;
