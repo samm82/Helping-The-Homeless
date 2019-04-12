@@ -145,14 +145,17 @@ public class OutputWindow {
 		btnNext.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				ShelterT best = Shelters.delMax();
-				System.out.println(best.getName());
-				Output.setText(best.getName() + "\n");			
-				Output.append(best.getOrgName() + "\n\n");
-				Output.append(best.getAddress() + ", Toronto, ON\n");	
-				Output.append("Historical Occupancy: " + best.getOcc2018(dayIndex) + "\n");		
-				Output.append("Capacity: " + best.getCap2018(dayIndex) + "\n");					
-				Output.append(best.getTypeString());
+				if (Shelters.isEmpty()) btnNext.dispose();
+				else {
+					ShelterT best = Shelters.delMax();
+					System.out.println(best.getName());
+					Output.setText(best.getName() + "\n");			
+					Output.append(best.getOrgName() + "\n\n");
+					Output.append(best.getAddress() + ", Toronto, ON\n");	
+					Output.append("Historical Occupancy: " + best.getOcc2018(dayIndex) + "\n");		
+					Output.append("Capacity: " + best.getCap2018(dayIndex) + "\n");					
+					Output.append(best.getTypeString());
+				}
 			}
 		});
 		btnNext.setBounds(400, 10, 45, 157);

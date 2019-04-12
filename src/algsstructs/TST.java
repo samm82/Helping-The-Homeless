@@ -8,6 +8,12 @@ package algsstructs;
 
 import adt.AddressT;
 
+/**
+ * 
+ * @author Robert Sedgewick and Kevin Wayne
+ *
+ * @param <Value> The type of info to be stored
+ */
 public class TST<Value> {
     private int n;              // size
     private Node<Value> root;   // root of TST
@@ -201,64 +207,4 @@ public class TST<Value> {
         if (c == '.' || c > x.c) collect(x.right, prefix, i, pattern, queue);
     }
 
-
-    /**
-     * Unit tests the {@code TST} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-
-        // build symbol table from standard input
-    	/*
-        TST<Integer> st = new TST<Integer>();
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
-        }
-        
-        // print results
-        if (st.size() < 100) {
-            System.out.println("keys(\"\"):");
-            for (String key : st.keys()) {
-                System.out.println(key + " " + st.get(key));
-            }
-            System.out.println();
-        }
-
-        System.out.println("longestPrefixOf(\"shellsort\"):");
-        System.out.println(st.longestPrefixOf("shellsort"));
-        System.out.println();
-
-        System.out.println("longestPrefixOf(\"shell\"):");
-        System.out.println(st.longestPrefixOf("shell"));
-        System.out.println();
-
-        System.out.println("keysWithPrefix(\"shor\"):");
-        for (String s : st.keysWithPrefix("shor"))
-            System.out.println(s);
-        System.out.println();
-
-        System.out.println("keysThatMatch(\".he.l.\"):");
-        for (String s : st.keysThatMatch(".he.l."))
-            System.out.println(s);
-    	 */
-    	
-    	TST<AddressT> st = new TST<AddressT>();
-    	
-    	AddressT one = new AddressT("32", "thorndale", 30.4544, 39.03873);
-    	AddressT two = new AddressT("40", "cottrill", 30.4589, 39.03890);
-    	AddressT three = new AddressT("18", "thorndale", 30.4543, 39.03872);
-    	
-    	st.put(one.getNum() + " " + one.getSt(), one);
-    	st.put(two.getNum() + " " + two.getSt(), two);
-    	st.put(three.getNum() + " " + three.getSt(), three);
-    	
-    	System.out.println(st.size());
-    	
-    	System.out.println(st.contains(one.getNum() + " " + one.getSt()));
-    	
-    	System.out.println(st.get(one.getNum() + " " + one.getSt()).getNum());
-    	
-    }
 }

@@ -10,6 +10,12 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Class to construct a MaxPQ data structure
+ * @author Robert Sedgewick and Kevin Wayne
+ * 
+ * @param <Key> The type of elements
+ */
 public class MaxPQ<Key> implements Iterable<Key> {
     private Key[] pq;                    // store items at indices 1 to n
     private int n;                       // number of items on priority queue
