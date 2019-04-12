@@ -16,7 +16,7 @@ public class AddressT {
 	 * Constructor for new AddressT
 	 * @param num Street number
 	 * @param st Street name
-	 * @param lat Lattitude
+	 * @param lat Latitude
 	 * @param lon Longitude
 	 */
 	public AddressT(String num, String st, double lat, double lon) {

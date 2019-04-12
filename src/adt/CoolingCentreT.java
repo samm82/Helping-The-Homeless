@@ -24,7 +24,7 @@ public class CoolingCentreT extends LocationT {
 	 * @param type Type of center
 	 * @param name Name of center
 	 * @param address Address of center
-	 * @param lat Lattitude
+	 * @param lat Latitude
 	 * @param lon Longitude
 	 */
 	public CoolingCentreT(CentreT type, String name, String address, double lat, double lon) {
@@ -40,7 +40,10 @@ public class CoolingCentreT extends LocationT {
 		return this.type;
 	}
 	
-	
+	/**
+	 * Converts the cooling center info to a string
+	 * @return String of cooling center info
+	 */
 	@Override
 	public String toString() {
 		return this.getName() + " | " + this.getAddress();
