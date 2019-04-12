@@ -184,7 +184,7 @@ public class FindShelter {
 			public void widgetSelected(SelectionEvent e) {
 				Label lblLoading = new Label(shell, SWT.NONE);
 				lblLoading.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-				lblLoading.setBounds(10, 233, 70, 20);
+				lblLoading.setBounds(10, 233, 188, 20);
 				lblLoading.setText("Calculating Best Shelter...");
 				_address_ = address.getText();
 		        if(address.getText().equals("")) {
