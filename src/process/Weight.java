@@ -10,16 +10,39 @@ import adt.ShelterT;
 import adt.UserT;
 import adt.UserT.UserResT;
 import io.Read;
-import adt.ShelterT.shelterResT;
 
 public class Weight {
 	
 	public static double weightCap(ShelterT shel, int date) {
-		double cap = 0.3 * shel.getOcc2017(date) + 0.7 * shel.getOcc2018(date);
+		double sumCap = 0; 
+		int numberDays = 0;
+		
+		for (int index = date-3; index < date+4; index++) {
+			if (!(index < 0 || index > 364)) {
+				if (shel.getCap2018(index) != 0 && shel.getCap2017(index) != 0) {
+					sumCap += 0.3 * shel.getOcc2017(index) + 0.7 * shel.getOcc2018(index);
+					numberDays++;
+				} else if (shel.getCap2017(index) != 0) {
+					sumCap += shel.getOcc2018(index);
+					numberDays++;
+				} else if (shel.getCap2018(index) != 0) {
+					sumCap += shel.getOcc2017(index);
+					numberDays++;
+				} else { continue; }
+			}
+		}
+		
+		if (numberDays == 0) {
+			throw new IllegalArgumentException("Capacity undefined");
+			
+		}
+		
+		double avg = sumCap / numberDays;
+		
 		if (shel.getCap2018(date) != 0)
-			return (1 - (cap / shel.getCap2018(date)));
+			return (1 - (avg / shel.getCap2018(date)));
 		else if (shel.getCap2017(date) != 0)
-			return (1 - (shel.getOcc2017(date) / shel.getCap2017(date)));
+			return (1 - (avg / shel.getCap2017(date)));
 		else 
 			throw new IllegalArgumentException("Capacity undefined");
 	}
@@ -69,7 +92,7 @@ public class Weight {
 			} else {
 //				System.out.println("   " + weightDist(calcDist(loc, user)));
 //				System.out.println("   " + weightCap(shel, dayIndex));
-				return (0.75 * weightDist(calcDist(loc, user)) + 0.25 * weightCap(shel, dayIndex));
+				return (0.8 * weightDist(calcDist(loc, user)) + 0.2 * weightCap(shel, dayIndex));
 			}
 		} else {
 			return weightDist(calcDist(loc, user));

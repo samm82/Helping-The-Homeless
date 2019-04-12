@@ -195,16 +195,14 @@ public class FindShelter {
 		        }
 		        else {
 		        	UserResT type = getUserType();
-		        	info = new UserInputT(type, _address_);
 		    		// creates a 2d array of all shelters
 		    		ShelterT[][] masterArray = Read.readShelterData();
 		    		
 		    		// creates TST of addresses
 		        	TST<AddressT> addresses = Read.readAddressData();
 					
-					String add = info.getAdd();
-					UserT user = new UserT(info.getType(), addresses.get(add).getLat(), addresses.get(add).getLon());
-		        	
+					UserT user = new UserT(type, addresses.get(_address_).getLat(), addresses.get(_address_).getLon());
+		        						
 					AddressT shelAdd;
 					for (int i = 0; i < masterArray.length; i++) {
 						for (ShelterT shel : masterArray[i]) {
