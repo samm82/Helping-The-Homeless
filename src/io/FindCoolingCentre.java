@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Button;
  * @author Hassan and Sam
  *
  */
-public class CoolingCenter {
+public class FindCoolingCentre {
 
 	protected Shell shell;
 	private Text address;
@@ -38,7 +38,7 @@ public class CoolingCenter {
 	 */
 	public static void main(String[] args) {
 		try {
-			CoolingCenter window = new CoolingCenter();
+			FindCoolingCentre window = new FindCoolingCentre();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();

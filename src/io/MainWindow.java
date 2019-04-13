@@ -70,7 +70,7 @@ public class MainWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 		        shell.dispose();
-				CoolingCenter CoolingCenter = new CoolingCenter();
+				FindCoolingCentre CoolingCenter = new FindCoolingCentre();
 				CoolingCenter.open();
 			}
 		});
