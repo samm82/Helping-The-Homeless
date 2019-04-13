@@ -13,7 +13,10 @@ import java.util.Calendar;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import adt.LocationT;
+import adt.LocationT.locTypeT;
 import adt.ShelterT;
+import adt.CoolingCentreT;
 import algsstructs.MaxPQ;
 
 import org.eclipse.swt.widgets.Button;
@@ -27,7 +30,7 @@ public class OutputWindow {
 	private String[] shelter_address;
 	private Button btnBack;
 	private Button btnNext;
-	private static MaxPQ<ShelterT> Shelters;
+	private static MaxPQ<LocationT> Locations;
 	private static String address;
 
 	
@@ -37,7 +40,7 @@ public class OutputWindow {
 	public static void main(String[] args) {
 		try {
 			OutputWindow window = new OutputWindow();
-			window.open(Shelters, address);
+			window.open(Locations, address);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,9 +48,9 @@ public class OutputWindow {
 	
 	 // Open the window.
 	 // @wbp.parser.entryPoint
-	public void open(MaxPQ<ShelterT> shelPQ, String add) {
+	public void open(MaxPQ<LocationT> locPQ, String add) {
 		Display display = Display.getDefault();
-		Shelters = shelPQ;
+		Locations = locPQ;
 		address = add;
 		createContents();
 		shell.open();
@@ -77,15 +80,18 @@ public class OutputWindow {
 		Calendar calendar = Calendar.getInstance();
 		int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
 		
-		ShelterT best = Shelters.delMax();
+		LocationT best = Locations.delMax();
 		System.out.println(best.getName());
-		Output.setText(best.getName() + "\n");			
-		Output.append(best.getOrgName() + "\n\n");
-		Output.append(best.getAddress() + ", Toronto, ON\n");	
-		Output.append("Historical Occupancy: " + best.getOcc2018(dayIndex) + "\n");		
-		Output.append("Capacity: " + best.getCap2018(dayIndex) + "\n");					
-		Output.append(best.getTypeString());								
-
+		Output.setText(best.getName() + "\n");
+		if(best.getLocType() == locTypeT.SHELTER) {
+			Output.append(((ShelterT) best).getOrgName() + "\n\n");
+		}
+			Output.append(best.getAddress() + ", Toronto, ON\n");	
+		if(best.getLocType() == locTypeT.SHELTER) {
+			Output.append("Historical Occupancy: " + ((ShelterT) best).getOcc2018(dayIndex) + "\n");		
+			Output.append("Capacity: " + ((ShelterT) best).getCap2018(dayIndex) + "\n");					
+			Output.append(((ShelterT) best).getTypeString());								
+		}
 		
 		Button btnOpenShelterIn = new Button(shell, SWT.NONE);
 		btnOpenShelterIn.addSelectionListener(new SelectionAdapter() {
@@ -93,14 +99,16 @@ public class OutputWindow {
 			public void widgetSelected(SelectionEvent e) {
 				String temp = Output.getText();
 				shelter_address = temp.split("\n");
-				temp = shelter_address[3].replace(" ", "+");
+				if(best.getLocType() == locTypeT.SHELTER) {
+					temp = shelter_address[3].replace(" ", "+");
+				}
+				else {
+					temp = shelter_address[1].replace(" ", "+");
+				}
 				temp = temp.trim();
 				
 				address = address.replace(" ", "+");
-				address = address.trim();
-
-//				System.out.println(shelter_address[2]);
-				
+				address = address.trim();				
 				String url = "https://www.google.ca/maps/dir/" + address + "+Toronto,+ON/" + temp + "/";
 
 		        if(Desktop.isDesktopSupported()){
@@ -142,16 +150,20 @@ public class OutputWindow {
 		btnNext.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (Shelters.isEmpty()) btnNext.dispose();
+				if (Locations.isEmpty()) btnNext.dispose();
 				else {
-					ShelterT best = Shelters.delMax();
+					LocationT best = Locations.delMax();
 					System.out.println(best.getName());
-					Output.setText(best.getName() + "\n");			
-					Output.append(best.getOrgName() + "\n\n");
-					Output.append(best.getAddress() + ", Toronto, ON\n");	
-					Output.append("Historical Occupancy: " + best.getOcc2018(dayIndex) + "\n");		
-					Output.append("Capacity: " + best.getCap2018(dayIndex) + "\n");					
-					Output.append(best.getTypeString());
+					Output.setText(best.getName() + "\n");
+					if(best.getLocType() == locTypeT.SHELTER) {
+						Output.append(((ShelterT) best).getOrgName() + "\n\n");
+					}
+						Output.append(best.getAddress() + ", Toronto, ON\n");	
+					if(best.getLocType() == locTypeT.SHELTER) {
+						Output.append("Historical Occupancy: " + ((ShelterT) best).getOcc2018(dayIndex) + "\n");		
+						Output.append("Capacity: " + ((ShelterT) best).getCap2018(dayIndex) + "\n");					
+						Output.append(((ShelterT) best).getTypeString());								
+					}
 				}
 			}
 		});

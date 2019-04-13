@@ -12,6 +12,8 @@ import algsstructs.MaxPQ;
 import algsstructs.TST;
 import process.Weight;
 
+import adt.LocationT;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -103,9 +105,11 @@ public class CoolingCenter {
 						cool[i].setScore(Weight.calcScore(cool[i], user));
 					}
 					
-					MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
+					MaxPQ<LocationT> coolPQ = new MaxPQ<LocationT>(cool);
 					
-					System.out.println(coolPQ.delMax().getName());
+			        shell.dispose();
+					OutputWindow OutputWindow = new OutputWindow();
+					OutputWindow.open(coolPQ, _address_);
 		        }
 			}
 		});

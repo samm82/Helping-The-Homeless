@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import adt.AddressT;
+import adt.LocationT;
 import adt.ShelterT;
 import adt.UserT;
 import adt.UserT.UserResT;
@@ -206,29 +207,29 @@ public class FindShelter {
 						}
 					}
 					
-					MaxPQ<ShelterT> shelPQ;
+					MaxPQ<LocationT> shelPQ;
 					
 					switch (user.getResType()) {		
 					case MALE_ONLY:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[0]);
+						shelPQ = new MaxPQ<LocationT>(masterArray[0]);
 						break;
 					case MALE_COED:
-						shelPQ = new MaxPQ<ShelterT>(concatenate(masterArray[0], masterArray[2]));
+						shelPQ = new MaxPQ<LocationT>(concatenate(masterArray[0], masterArray[2]));
 						break;
 					case FEMALE_ONLY:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[1]);
+						shelPQ = new MaxPQ<LocationT>(masterArray[1]);
 						break;
 					case FEMALE_COED:
-						shelPQ = new MaxPQ<ShelterT>(concatenate(masterArray[1], masterArray[2]));
+						shelPQ = new MaxPQ<LocationT>(concatenate(masterArray[1], masterArray[2]));
 						break;
 					case FAMILY:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[3]);
+						shelPQ = new MaxPQ<LocationT>(masterArray[3]);
 						break;
 					case YOUTH:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[4]);
+						shelPQ = new MaxPQ<LocationT>(masterArray[4]);
 						break;
 					default:
-						shelPQ = new MaxPQ<ShelterT>(masterArray[0]);
+						shelPQ = new MaxPQ<LocationT>(masterArray[0]);
 						break;
 					}
 		        	
