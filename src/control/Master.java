@@ -23,7 +23,7 @@ public class Master {
 			System.out.println("The GUI Was unable to open");
 			System.out.println("This could be due to a variety of reasons,");
 			System.out.println("But the primary reason may be due to the SWT jar reference");
-			System.out.println("In order to fix this follow these steps (This was aproved by Andy):");
+			System.out.println("In order to fix this follow these steps (This was aproved by Andy, our TA):");
 			System.out.println("1. double click on 'Referenced Libraries' in the Package Explorer");
 			System.out.println("2. Ensure the version of the jar file matches your operating system");
 			System.out.println("win = windows, linux = linux, mac = osx");
