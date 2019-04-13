@@ -13,7 +13,7 @@ import io.Read;
 
 public class Weight {
 	
-	public static double weightCap(ShelterT shel, int date) {
+	public static double weightOcc(ShelterT shel, int date) {
 		double sumCap = 0; 
 		int numberDays = 0;
 		
@@ -68,7 +68,7 @@ public class Weight {
 			if (!(shel.isValidType(user) && shel.isValidCap(dayIndex))) {
 				return 0.0;
 			} else {
-				return (0.8 * weightDist(loc, user) + 0.2 * weightCap(shel, dayIndex));
+				return (0.8 * weightDist(loc, user) + 0.2 * weightOcc(shel, dayIndex));
 			}
 		} else {
 			return weightDist(loc, user);
@@ -97,7 +97,7 @@ public class Weight {
 				System.out.println("WghtDist: " + weightDist(shel, user));
 				Calendar calendar = Calendar.getInstance();
 				int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
-				System.out.println("Cap:      " + weightCap(shel, dayIndex));
+				System.out.println("WghtOcc:  " + weightOcc(shel, dayIndex));
 				System.out.println("Score:    " + calcScore(shel, user));
 			}
 		}
