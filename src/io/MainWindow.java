@@ -45,7 +45,7 @@ public class MainWindow {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(394, 245);
+		shell.setSize(438, 197);
 		shell.setText("SWT Application");
 		
 		Button btnFindShelter = new Button(shell, SWT.NONE);
@@ -57,20 +57,8 @@ public class MainWindow {
 				FindShelter.open();
 			}
 		});
-		btnFindShelter.setBounds(10, 24, 356, 30);
+		btnFindShelter.setBounds(10, 65, 198, 30);
 		btnFindShelter.setText("Find Shelter");
-		
-		Button btnGetShelterInfo = new Button(shell, SWT.NONE);
-		btnGetShelterInfo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				shell.dispose();
-				GetShelterInfo GetShelterInfo = new GetShelterInfo();
-				GetShelterInfo.open();
-			}
-		});
-		btnGetShelterInfo.setBounds(10, 80, 356, 30);
-		btnGetShelterInfo.setText("Get Shelter Info");
 		
 		Button btnFindNearestCooling = new Button(shell, SWT.NONE);
 		btnFindNearestCooling.addSelectionListener(new SelectionAdapter() {
@@ -81,7 +69,7 @@ public class MainWindow {
 //				OutputWindow.open();
 			}
 		});
-		btnFindNearestCooling.setBounds(10, 135, 356, 30);
+		btnFindNearestCooling.setBounds(214, 65, 198, 30);
 		btnFindNearestCooling.setText("Find Nearest Cooling Center");
 
 	}
