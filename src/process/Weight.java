@@ -11,8 +11,21 @@ import adt.UserT;
 import adt.UserT.UserResT;
 import io.Read;
 
+/**
+ * Module for weighting locations based on distance and occupancy.
+ * 
+ * @author Sam
+ *
+ */
 public class Weight {
 	
+	/**
+	 * Weights a shelter based on historical occupancy.
+	 * 
+	 * @param  shel The shelter to be weighted.
+	 * @param  date The date index (the current day of the year minus one).
+	 * @return The weighting based on occupancy, from zero to one.
+	 */
 	public static double weightOcc(ShelterT shel, int date) {
 		double sumCap = 0; 
 		int numberDays = 0;
@@ -32,10 +45,7 @@ public class Weight {
 			}
 		}
 		
-		if (numberDays == 0) {
-			throw new IllegalArgumentException("Capacity undefined");
-			
-		}
+		if (numberDays == 0) throw new IllegalArgumentException("Capacity undefined");	
 		
 		double avg = sumCap / numberDays;
 		
@@ -47,6 +57,13 @@ public class Weight {
 			throw new IllegalArgumentException("Capacity undefined");
 	}
 
+	/**
+	 * Weights a location based on distance from user.
+	 * 
+	 * @param  loc  The location to be weighted.
+	 * @param  user The user - the distance is measured from the location to the user.
+	 * @return The weighting based on distance, from zero to one.
+	 */
 	public static double weightDist(LocationT loc, UserT user) {
 		double latS = loc.getLat(), latU = user.getLat();
 		double lonS = loc.getLon(), lonU = user.getLon();
@@ -60,6 +77,13 @@ public class Weight {
 		return (1 - (dist / (5 + dist))); // Maps distance to a weighting between 0 and 1.
 	}
 	
+	/**
+	 * Calculates the total score (weighting) of a location.
+	 * 
+	 * @param  loc  The location to be weighted.
+	 * @param  user The user - the distance is measured from the location to the user.
+	 * @return The total weighting of the location, from zero to one.
+	 */
 	public static double calcScore(LocationT loc, UserT user) {
 		Calendar calendar = Calendar.getInstance();
 		int dayIndex = calendar.get(Calendar.DAY_OF_YEAR) - 1;
@@ -75,7 +99,11 @@ public class Weight {
 		}
 	}
 	
-	
+	/**
+	 * Main function for testing.
+	 * 
+	 * @param args An array of command line arguments.
+	 */
 	public static void main(String args[]) {
 		ShelterT[][] masterArray = Read.readShelterData();
 		
