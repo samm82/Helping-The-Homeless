@@ -6,8 +6,6 @@
 
 package algsstructs;
 
-import adt.AddressT;
-
 /**
  * 
  * @author Robert Sedgewick and Kevin Wayne

@@ -16,7 +16,6 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import adt.LocationT;
 import adt.LocationT.locTypeT;
 import adt.ShelterT;
-import adt.CoolingCentreT;
 import algsstructs.MaxPQ;
 import process.Weight;
 
