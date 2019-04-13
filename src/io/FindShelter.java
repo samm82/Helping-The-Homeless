@@ -72,10 +72,11 @@ public class FindShelter {
 	protected void createContents() {
 		shlUserInfo = new Shell();
 		shlUserInfo.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		shlUserInfo.setSize(668, 315);
+		shlUserInfo.setSize(668, 303);
 		shlUserInfo.setText("User Info");
 		shlUserInfo.scroll(0, 0, 0, 0, 5, 5, true);
 		shlUserInfo.setLayout(null);
+
 		
 		Label lblHereAreYour = new Label(shlUserInfo, SWT.NONE);
 		lblHereAreYour.setBounds(106, 11, 477, 33);
@@ -173,10 +174,7 @@ public class FindShelter {
 		btnFindShelter.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Label lblLoading = new Label(shlUserInfo, SWT.NONE);
-				lblLoading.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-				lblLoading.setBounds(10, 233, 188, 20);
-				lblLoading.setText("Calculating Best Shelter...");
+
 				_address_ = address.getText();
 		        if(address.getText().equals("")) {
 			        MessageBox dialog = new MessageBox(shlUserInfo, SWT.ICON_ERROR | SWT.OK);
@@ -185,6 +183,10 @@ public class FindShelter {
 					dialog.open();
 		        }
 		        else {
+					Label lblLoading = new Label(shlUserInfo, SWT.NONE);
+					lblLoading.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+					lblLoading.setBounds(10, 233, 188, 20);
+					lblLoading.setText("Calculating Best Shelter...");
 		        	UserResT type = getUserType();
 		    		// creates a 2d array of all shelters
 		    		ShelterT[][] masterArray = Read.readShelterData();
@@ -250,7 +252,7 @@ public class FindShelter {
 		        }
 			}
 		});
-		btnFindShelter.setBounds(10, 197, 630, 30);
+		btnFindShelter.setBounds(10, 200, 630, 30);
 		btnFindShelter.setText("Find Shelter");
 		
 		Label lblEnterYourCurrent = new Label(shlUserInfo, SWT.NONE);

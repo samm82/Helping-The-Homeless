@@ -64,9 +64,9 @@ public class MainWindow {
 		btnFindNearestCooling.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-//		        shell.dispose();
-//				OutputWindow OutputWindow = new OutputWindow();
-//				OutputWindow.open();
+		        shell.dispose();
+				CoolingCenter CoolingCenter = new CoolingCenter();
+				CoolingCenter.open();
 			}
 		});
 		btnFindNearestCooling.setBounds(214, 65, 198, 30);
