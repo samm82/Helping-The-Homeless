@@ -2,21 +2,6 @@ package io;
 
 import java.util.ArrayList;
 
-import org.eclipse.swt.SWT;
-
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-
-import org.eclipse.wb.swt.SWTResourceManager;
-
 import adt.AddressT;
 import adt.LocationT;
 import adt.ShelterT;
@@ -26,8 +11,20 @@ import algsstructs.MaxPQ;
 import algsstructs.TST;
 import process.Weight;
 
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+
 /**
- * GUI module for finding closest shelter
+ * GUI module for finding closest shelter.
  * @author Hassan and Sam
  *
  */
@@ -37,25 +34,12 @@ public class FindShelter {
 	private boolean male;
 	private boolean youth;
 	private boolean family;
-	private boolean CoEd;
+	private boolean coed;
 	private Text address;
 	private String _address_;
 	
 	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			FindShelter window = new FindShelter();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Open the window.
+	 * Opens the window.
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -67,11 +51,10 @@ public class FindShelter {
 				display.sleep();
 			}
 		}
-		
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Creates contents of the window.
 	 */
 	protected void createContents() {
 		shlUserInfo = new Shell();
@@ -81,7 +64,6 @@ public class FindShelter {
 		shlUserInfo.scroll(0, 0, 0, 0, 5, 5, true);
 		shlUserInfo.setLayout(null);
 
-		
 		Label lblHereAreYour = new Label(shlUserInfo, SWT.NONE);
 		lblHereAreYour.setBounds(106, 11, 477, 33);
 		lblHereAreYour.setFont(SWTResourceManager.getFont("Times New Roman", 14, SWT.BOLD));
@@ -121,7 +103,7 @@ public class FindShelter {
 		btnNoCoed.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				CoEd = false;
+				coed = false;
 			}
 		});
 		btnNoCoed.setBounds(122, 10, 89, 20);
@@ -131,7 +113,7 @@ public class FindShelter {
 		btnCoed.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				CoEd = true;
+				coed = true;
 			}
 		});
 		btnCoed.setBounds(0, 10, 72, 20);
@@ -266,16 +248,15 @@ public class FindShelter {
 		});
 		btnBack.setBounds(10, 10, 90, 30);
 		btnBack.setText("Back");
-		
 	}
 	
 	/**
-	 * @return User type
+	 * @return The type of residents of a shelter desired by user.
 	 */
-	public UserResT getUserType() {		
+	private UserResT getUserType() {		
 		if      (youth)  return UserResT.YOUTH;
 		else if (family) return UserResT.FAMILY;
-		else if (CoEd) {
+		else if (coed) {
 			if  (male)   return UserResT.MALE_COED;
 			else         return UserResT.FEMALE_COED;
 		} else {
@@ -284,6 +265,12 @@ public class FindShelter {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param a An array of ShelterT.
+	 * @param b An array of ShelterT.
+	 * @return  An array of ShelterT containing all shelters in a and b.
+	 */
 	private ShelterT[] concatenate(ShelterT[] a, ShelterT[] b) {	    
 	    ArrayList<ShelterT> c = new ArrayList<ShelterT>();
 	    
@@ -294,13 +281,5 @@ public class FindShelter {
 	    cArray = c.toArray(cArray);
 	    
 	    return cArray;
-	}
-	
-	/**
-	 * 
-	 * @return Address
-	 */
-	public String getAddress() {
-		return address.getText();
 	}
 }
