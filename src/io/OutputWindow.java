@@ -24,6 +24,11 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+/**
+ * Creates output window for GUI
+ * @author Hassan and Sam
+ *
+ */
 public class OutputWindow {
 
 	protected Shell shell;

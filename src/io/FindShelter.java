@@ -26,6 +26,11 @@ import algsstructs.MaxPQ;
 import algsstructs.TST;
 import process.Weight;
 
+/**
+ * GUI module for finding closest shelter
+ * @author Hassan and Sam
+ *
+ */
 public class FindShelter {
 
 	protected Shell shlUserInfo;
@@ -264,6 +269,9 @@ public class FindShelter {
 		
 	}
 	
+	/**
+	 * @return User type
+	 */
 	public UserResT getUserType() {		
 		if      (youth)  return UserResT.YOUTH;
 		else if (family) return UserResT.FAMILY;
@@ -288,6 +296,10 @@ public class FindShelter {
 	    return cArray;
 	}
 	
+	/**
+	 * 
+	 * @return Address
+	 */
 	public String getAddress() {
 		return address.getText();
 	}

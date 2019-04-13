@@ -21,6 +21,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Button;
 
+/**
+ * GUI module for finding closest Cooling Centre
+ * @author Hassan and Sam
+ *
+ */
 public class CoolingCenter {
 
 	protected Shell shell;

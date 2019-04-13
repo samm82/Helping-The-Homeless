@@ -8,6 +8,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+/**
+ * Main Window for GUI
+ * @author Hassan and Sam
+ *
+ */
 public class MainWindow {
 	
 	protected Shell shell;
