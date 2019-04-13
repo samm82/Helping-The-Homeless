@@ -12,10 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import adt.CoolingCentreT.CentreT;
-
 /**
- * @author joshua
+ * @author Joshua
  *
  */
 public class CoolingCentreTTest {
@@ -45,14 +43,6 @@ public class CoolingCentreTTest {
 		assert(cooling_centres.length == 172);
 	}
 	
-	/**
-	 * Test method for {@link adt.CoolingCentreT#getType()}.
-	 */
-	@Test
-	public void testGetType() {
-		assert(cooling_centres[0].getType() == CentreT.LIBRARY);
-	}
-
 	/**
 	 * Test method for {@link adt.CoolingCentreT#toString()}.
 	 */

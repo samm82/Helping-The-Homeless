@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import adt.AddressT;
 import adt.CoolingCentreT;
-import adt.CoolingCentreT.CentreT;
 import adt.ShelterT;
 import adt.ShelterT.shelterResT;
 import algsstructs.TST;
@@ -167,20 +166,12 @@ public class Read {
 	    	    
 //	    	    System.out.println(line);
 	    	    String[] data = line.split(",");
-	    	    String type = data[2];
 	    	    String name = data[4] + " " + data[3];
 	    	    String address = data[5];
 	    	    double lat = Double.parseDouble(data[8]);
 	    	    double lon = Double.parseDouble(data[9]);
 	    	    
-	    	    switch (type) {
-				case "LIBRARY":
-		    	    coolingArray.add(new CoolingCentreT(CentreT.LIBRARY, name, address, lat, lon));
-					break;
-				case "COMM_CNTR":
-					coolingArray.add(new CoolingCentreT(CentreT.COMM_CNTR, name, address, lat, lon));
-					break;
-				}
+	    	    coolingArray.add(new CoolingCentreT(name, address, lat, lon));
 	    	    
 	    	}
 	    	lineScanner.close();

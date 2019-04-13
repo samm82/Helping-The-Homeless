@@ -15,7 +15,7 @@ public class LocationT implements Comparable<LocationT> {
 	 *
 	 */
 	public enum locTypeT {
-		SHELTER, COMM_CNTR;
+		SHELTER, COOL_CNTR;
 	}
 
 	private String name, address;
