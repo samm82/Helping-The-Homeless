@@ -1,6 +1,8 @@
 /**
  * 
  */
+
+// This method tests readAddressData in class Read in package io as well.
 package adt;
 import io.*;
 import algsstructs.*;
@@ -37,6 +39,9 @@ public class AddressTTest {
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * Test data size to ensure being read in properly
+	 */
 	@Test
 	public void testReadAddress() {
 		assert(addresses.size() == 521826);
