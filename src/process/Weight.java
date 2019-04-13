@@ -26,7 +26,7 @@ public class Weight {
 	 * @param  date The date index (the current day of the year minus one).
 	 * @return The average occupancy of a shelter around a given date (index).
 	 */
-	public static double averageOcc(ShelterT shel, int date) {
+	public static int averageOcc(ShelterT shel, int date) {
 		double sumCap = 0; 
 		int numberDays = 0;
 		int minDay = date-3, maxDay = date+4;
@@ -48,7 +48,7 @@ public class Weight {
 		
 		if (numberDays == 0) throw new IllegalArgumentException("Capacity undefined");	
 		
-		return sumCap / numberDays;
+		return (int) sumCap / numberDays;
 	}
 	
 	/**
