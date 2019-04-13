@@ -18,6 +18,7 @@ import adt.LocationT.locTypeT;
 import adt.ShelterT;
 import adt.CoolingCentreT;
 import algsstructs.MaxPQ;
+import process.Weight;
 
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -88,7 +89,7 @@ public class OutputWindow {
 		}
 			Output.append(best.getAddress() + ", Toronto, ON\n");	
 		if(best.getLocType() == locTypeT.SHELTER) {
-			Output.append("Historical Occupancy: " + ((ShelterT) best).getOcc2018(dayIndex) + "\n");		
+			Output.append("Historical Occupancy: " + Weight.averageOcc((ShelterT) best, dayIndex) + "\n");		
 			Output.append("Capacity: " + ((ShelterT) best).getCap2018(dayIndex) + "\n");					
 			Output.append(((ShelterT) best).getTypeString());								
 		}
