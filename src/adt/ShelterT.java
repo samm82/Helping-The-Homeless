@@ -200,16 +200,6 @@ public class ShelterT extends LocationT {
 	}
 
 	/**
-	 * Checks to see whether the shelter was full historically
-	 * 
-	 * @param date Date index
-	 * @return Boolean
-	 */
-	public boolean isFull(int date) {
-		return (this.getOcc2018(date) == this.getCap2018(date) && this.getOcc2017(date) == this.getCap2017(date));
-	}
-
-	/**
 	 * Converts the shelter info to a string
 	 * 
 	 * @return String of shelter info
