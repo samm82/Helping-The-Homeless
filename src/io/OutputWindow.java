@@ -1,5 +1,18 @@
 package io;
 
+import java.util.Calendar;
+
+import adt.LocationT;
+import adt.LocationT.locTypeT;
+import adt.ShelterT;
+import algsstructs.MaxPQ;
+import process.Weight;
+
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -8,23 +21,9 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Calendar;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.wb.swt.SWTResourceManager;
-
-import adt.LocationT;
-import adt.LocationT.locTypeT;
-import adt.ShelterT;
-import algsstructs.MaxPQ;
-import process.Weight;
-
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 
 /**
- * Creates output window for GUI
+ * Creates output window for GUI.
  * @author Hassan and Sam
  *
  */
@@ -37,21 +36,8 @@ public class OutputWindow {
 	private Button btnNext;
 	private static MaxPQ<LocationT> Locations;
 	private static String address;
-
-	
-	 // Launch the application.
-	 // @param args
-	 // @wbp.parser.entryPoint
-	public static void main(String[] args) {
-		try {
-			OutputWindow window = new OutputWindow();
-			window.open(Locations, address);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	 // Open the window.
+		
+	 // Opens the window.
 	 // @wbp.parser.entryPoint
 	public void open(MaxPQ<LocationT> locPQ, String add) {
 		Display display = Display.getDefault();
@@ -68,7 +54,7 @@ public class OutputWindow {
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Creates contents of the window.
 	 */
 	protected void createContents() {
 		shell = new Shell();
@@ -88,11 +74,11 @@ public class OutputWindow {
 		LocationT best = Locations.delMax();
 		System.out.println(best.getName());
 		Output.setText(best.getName() + "\n");
-		if(best.getLocType() == locTypeT.SHELTER) {
+		if (best.getLocType() == locTypeT.SHELTER) {
 			Output.append(((ShelterT) best).getOrgName() + "\n\n");
 		}
 			Output.append(best.getAddress() + ", Toronto, ON\n");	
-		if(best.getLocType() == locTypeT.SHELTER) {
+		if (best.getLocType() == locTypeT.SHELTER) {
 			Output.append("Historical Occupancy: " + Weight.averageOcc((ShelterT) best, dayIndex) + "\n");		
 			Output.append("Capacity: " + ((ShelterT) best).getCap2018(dayIndex) + "\n");					
 			Output.append(((ShelterT) best).getTypeString());								
@@ -104,7 +90,7 @@ public class OutputWindow {
 			public void widgetSelected(SelectionEvent e) {
 				String temp = Output.getText();
 				shelter_address = temp.split("\n");
-				if(best.getLocType() == locTypeT.SHELTER) {
+				if (best.getLocType() == locTypeT.SHELTER) {
 					temp = shelter_address[3].replace(" ", "+");
 				}
 				else {
@@ -116,20 +102,18 @@ public class OutputWindow {
 				address = address.trim();				
 				String url = "https://www.google.ca/maps/dir/" + address + "+Toronto,+ON/" + temp + "/";
 
-		        if(Desktop.isDesktopSupported()){
+		        if (Desktop.isDesktopSupported()){
 		            Desktop desktop = Desktop.getDesktop();
 		            try {
 		                desktop.browse(new URI(url));
 		            } catch (IOException | URISyntaxException e1) {
-		                // TODO Auto-generated catch block
 		                e1.printStackTrace();
 		            }
-		        }else{
+		        } else {
 		            Runtime runtime = Runtime.getRuntime();
 		            try {
 		                runtime.exec("xdg-open " + url);
 		            } catch (IOException e1) {
-		                // TODO Auto-generated catch block
 		                e1.printStackTrace();
 		            }
 		        }
@@ -174,7 +158,5 @@ public class OutputWindow {
 		});
 		btnNext.setBounds(400, 10, 45, 157);
 		btnNext.setText("Next");
-
 	}
-
 }
