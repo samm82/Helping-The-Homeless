@@ -29,7 +29,7 @@ import process.Weight;
 public class FindShelter {
 
 	
-	protected Shell shell;
+	protected Shell shlUserInfo;
 	private boolean male;
 	private boolean youth;
 	private boolean family;
@@ -56,9 +56,9 @@ public class FindShelter {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlUserInfo.open();
+		shlUserInfo.layout();
+		while (!shlUserInfo.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -70,21 +70,21 @@ public class FindShelter {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		shell.setSize(668, 315);
-		shell.setText("Best Shelter");
-		shell.scroll(0, 0, 0, 0, 5, 5, true);
-		shell.setLayout(null);
+		shlUserInfo = new Shell();
+		shlUserInfo.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shlUserInfo.setSize(668, 315);
+		shlUserInfo.setText("User Info");
+		shlUserInfo.scroll(0, 0, 0, 0, 5, 5, true);
+		shlUserInfo.setLayout(null);
 		
-		Label lblHereAreYour = new Label(shell, SWT.NONE);
+		Label lblHereAreYour = new Label(shlUserInfo, SWT.NONE);
 		lblHereAreYour.setBounds(106, 11, 477, 33);
 		lblHereAreYour.setFont(SWTResourceManager.getFont("Times New Roman", 14, SWT.BOLD));
 		lblHereAreYour.setAlignment(SWT.CENTER);
 		lblHereAreYour.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblHereAreYour.setText("Here are your best shelters");
+		lblHereAreYour.setText("Please Enter Your Info");
 		
-		Group group = new Group(shell, SWT.NONE);
+		Group group = new Group(shlUserInfo, SWT.NONE);
 		group.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		group.setBounds(10, 108, 188, 32);
 		
@@ -108,7 +108,7 @@ public class FindShelter {
 		Male.setBounds(0, 10, 57, 20);
 		Male.setText("Male");
 		
-		Group group_1 = new Group(shell, SWT.NONE);
+		Group group_1 = new Group(shlUserInfo, SWT.NONE);
 		group_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		group_1.setBounds(426, 108, 214, 33);
 		
@@ -132,7 +132,7 @@ public class FindShelter {
 		btnCoed.setBounds(0, 10, 72, 20);
 		btnCoed.setText("Co-ed");
 		
-		Group group_2 = new Group(shell, SWT.NONE);
+		Group group_2 = new Group(shlUserInfo, SWT.NONE);
 		group_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		group_2.setBounds(210, 146, 242, 32);
 		
@@ -169,17 +169,17 @@ public class FindShelter {
 		btnYouth.setBounds(0, 10, 66, 20);
 		btnYouth.setText("Youth");
 		
-		Button btnFindShelter = new Button(shell, SWT.NONE);
+		Button btnFindShelter = new Button(shlUserInfo, SWT.NONE);
 		btnFindShelter.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Label lblLoading = new Label(shell, SWT.NONE);
+				Label lblLoading = new Label(shlUserInfo, SWT.NONE);
 				lblLoading.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 				lblLoading.setBounds(10, 233, 188, 20);
 				lblLoading.setText("Calculating Best Shelter...");
 				_address_ = address.getText();
 		        if(address.getText().equals("")) {
-			        MessageBox dialog = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
+			        MessageBox dialog = new MessageBox(shlUserInfo, SWT.ICON_ERROR | SWT.OK);
 					dialog.setText("ERROR");
 					dialog.setMessage("Please enter a valid address");
 					dialog.open();
@@ -244,7 +244,7 @@ public class FindShelter {
 //					
 //					System.out.println(coolPQ.delMax().getName());
 		        	
-			        shell.dispose();
+			        shlUserInfo.dispose();
 					OutputWindow OutputWindow = new OutputWindow();
 					OutputWindow.open(shelPQ, _address_);
 		        }
@@ -253,19 +253,19 @@ public class FindShelter {
 		btnFindShelter.setBounds(10, 197, 630, 30);
 		btnFindShelter.setText("Find Shelter");
 		
-		Label lblEnterYourCurrent = new Label(shell, SWT.NONE);
+		Label lblEnterYourCurrent = new Label(shlUserInfo, SWT.NONE);
 		lblEnterYourCurrent.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblEnterYourCurrent.setBounds(10, 50, 188, 20);
 		lblEnterYourCurrent.setText("Enter Your Current Address");
 		
-		address = new Text(shell, SWT.BORDER);
+		address = new Text(shlUserInfo, SWT.BORDER);
 		address.setBounds(10, 76, 630, 26);
 		
-		Button btnBack = new Button(shell, SWT.NONE);
+		Button btnBack = new Button(shlUserInfo, SWT.NONE);
 		btnBack.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				shell.dispose();
+				shlUserInfo.dispose();
 				MainWindow MainWindow = new MainWindow();
 				MainWindow.open();
 			}
