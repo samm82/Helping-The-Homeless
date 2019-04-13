@@ -1,0 +1,9 @@
+The three .jar files in this lib directory was gotten from The Standard Widget Toolkit (SWT) made by eclipse and can be found at the following website: 
+https://download.eclipse.org/eclipse/downloads/drops4/R-4.10-201812060815/?fbclid=IwAR3pJYsXqnFatIR0_gWREyXZ14gDKE5JQwGg8vvGD8FnCHWRMFb-W5TjGlw#SWT
+
+This is an open source toolkit for java which was used to create the GUI for the application. More information can be found here: https://www.eclipse.org/swt/
+
+The SWT Binary and Source zip file for each platform (Win/Linux/Mac) was downloaded, the file was extracted, and the .jar file was places in the lib directory in
+the project.
+
+These platform specific .jar files allow the SWT application to be run.
