@@ -1,7 +1,7 @@
 package adt;
 
 /**
- * ADT for a user
+ * ADT for a user.
  * 
  * @author Sam and Nicholas
  *
@@ -9,10 +9,8 @@ package adt;
 public class UserT {
 
 	/**
-	 * Enum for user type
+	 * Enumerated type that represents the type of user.
 	 * 
-	 * @author Sam
-	 *
 	 */
 	public enum UserResT {
 		MALE_ONLY, MALE_COED, FEMALE_ONLY, FEMALE_COED, FAMILY, YOUTH
@@ -22,11 +20,11 @@ public class UserT {
 	private double lat, lon;
 
 	/**
-	 * Constructor for new UserT (for use with shelter)
+	 * Constructor for new UserT (for use with shelter).
 	 * 
-	 * @param type User type
-	 * @param lat  User latitude
-	 * @param lon  User longitude
+	 * @param type The user type.
+	 * @param lat  The user latitude.
+	 * @param lon  The user longitude.
 	 */
 	public UserT(UserResT type, double lat, double lon) {
 		this.resType = type;
@@ -37,8 +35,8 @@ public class UserT {
 	/**
 	 * Constructor for new UserT (for use with cooling centre).
 	 * 
-	 * @param lat  User latitude
-	 * @param lon  User longitude
+	 * @param lat  The user latitude.
+	 * @param lon  The user longitude.
 	 */
 	public UserT(double lat, double lon) {
 		this.lat = lat;
@@ -47,7 +45,7 @@ public class UserT {
 
 	/**
 	 * 
-	 * @return Type of user
+	 * @return The type of user.
 	 */
 	public UserResT getResType() {
 		return resType;
@@ -55,48 +53,7 @@ public class UserT {
 
 	/**
 	 * 
-	 * @return Boolean whether user is type family
-	 */
-	public boolean isFamily() {
-		return (resType == UserResT.FAMILY);
-	}
-
-	/**
-	 * 
-	 * @return Boolean whether user is type youth
-	 */
-	public boolean isYouth() {
-		return (resType == UserResT.YOUTH);
-	}
-
-	/**
-	 * 
-	 * @return Boolean whether user is open to co-ed shelters
-	 */
-	public boolean isFlexible() {
-		return ((resType == UserResT.MALE_COED) || (resType == UserResT.FEMALE_COED));
-	}
-
-	/**
-	 * Boolean whether user type is male
-	 * 
-	 * @return
-	 */
-	public boolean isMale() {
-		return ((resType == UserResT.MALE_COED) || (resType == UserResT.MALE_ONLY));
-	}
-
-	/**
-	 * 
-	 * @return Boolean whether user type is female
-	 */
-	public boolean isFemale() {
-		return ((resType == UserResT.FEMALE_COED) || (resType == UserResT.FEMALE_ONLY));
-	}
-
-	/**
-	 * 
-	 * @return Latitude
+	 * @return The latitude of the user.
 	 */
 	public double getLat() {
 		return lat;
@@ -104,7 +61,7 @@ public class UserT {
 
 	/**
 	 * 
-	 * @return Longitude
+	 * @return The longitude of the user.
 	 */
 	public double getLon() {
 		return lon;

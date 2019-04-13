@@ -172,20 +172,22 @@ public class ShelterT extends LocationT {
 	 * @return
 	 */
 	public boolean isValidType(UserT user) {
-		if (user.isFamily())
+		switch(user.getResType()) {
+		case FAMILY:
 			return (type == shelterResT.FAMILY);
-		if (user.isYouth())
+		case FEMALE_COED:
+			return (type == shelterResT.FEMALE || type == shelterResT.COED);
+		case FEMALE_ONLY:
+			return (type == shelterResT.FEMALE);
+		case MALE_COED:
+			return (type == shelterResT.MALE || type == shelterResT.COED);
+		case MALE_ONLY:
+			return (type == shelterResT.MALE);
+		case YOUTH:
 			return (type == shelterResT.YOUTH);
-
-		if (user.isFlexible() && type == shelterResT.COED)
-			return true;
-		else if (user.isMale() && type == shelterResT.MALE)
-			return true;
-		else if (user.isFemale() && type == shelterResT.FEMALE)
-			return true;
-		else
+		default:
 			return false;
-
+		}
 	}
 
 	/**
