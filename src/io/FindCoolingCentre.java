@@ -1,25 +1,23 @@
 package io;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.SWTResourceManager;
-
 import adt.AddressT;
 import adt.CoolingCentreT;
+import adt.LocationT;
 import adt.UserT;
 import algsstructs.MaxPQ;
 import algsstructs.TST;
 import process.Weight;
 
-import adt.LocationT;
-
+import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * GUI module for finding closest Cooling Centre
@@ -33,20 +31,7 @@ public class FindCoolingCentre {
 	private String _address_;
 
 	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			FindCoolingCentre window = new FindCoolingCentre();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Open the window.
+	 * Opens the window.
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -61,7 +46,7 @@ public class FindCoolingCentre {
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Creates contents of the window.
 	 */
 	protected void createContents() {
 		shell = new Shell();
@@ -132,8 +117,5 @@ public class FindCoolingCentre {
 		});
 		btnBack.setBounds(10, 10, 70, 30);
 		btnBack.setText("Back");
-		
-
-
 	}
 }
