@@ -20,17 +20,18 @@ import io.Read;
 public class Weight {
 	
 	/**
-	 * Weights a shelter based on historical occupancy.
+	 * Calculates the average occupancy of a shelter around a given date (index).
 	 * 
-	 * @param  shel The shelter to be weighted.
+	 * @param  shel The shelter to find the average occupancy.
 	 * @param  date The date index (the current day of the year minus one).
-	 * @return The weighting based on occupancy, from zero to one.
+	 * @return The average occupancy of a shelter around a given date (index).
 	 */
-	public static double weightOcc(ShelterT shel, int date) {
+	public static double averageOcc(ShelterT shel, int date) {
 		double sumCap = 0; 
 		int numberDays = 0;
+		int minDay = date-3, maxDay = date+4;
 		
-		for (int index = date-3; index < date+4; index++) {
+		for (int index = minDay; index < maxDay; index++) {
 			if (!(index < 0 || index > 364)) {
 				if (shel.getCap2018(index) != 0 && shel.getCap2017(index) != 0) {
 					sumCap += 0.3 * shel.getOcc2017(index) + 0.7 * shel.getOcc2018(index);
@@ -47,7 +48,18 @@ public class Weight {
 		
 		if (numberDays == 0) throw new IllegalArgumentException("Capacity undefined");	
 		
-		double avg = sumCap / numberDays;
+		return sumCap / numberDays;
+	}
+	
+	/**
+	 * Weights a shelter based on historical occupancy.
+	 * 
+	 * @param  shel The shelter to be weighted.
+	 * @param  date The date index (the current day of the year minus one).
+	 * @return The weighting based on occupancy, from zero to one.
+	 */
+	private static double weightOcc(ShelterT shel, int date) {
+		double avg = averageOcc(shel, date);
 		
 		if (shel.getCap2018(date) != 0)
 			return (1 - (avg / shel.getCap2018(date)));
@@ -64,7 +76,7 @@ public class Weight {
 	 * @param  user The user - the distance is measured from the location to the user.
 	 * @return The weighting based on distance, from zero to one.
 	 */
-	public static double weightDist(LocationT loc, UserT user) {
+	private static double weightDist(LocationT loc, UserT user) {
 		double latS = loc.getLat(), latU = user.getLat();
 		double lonS = loc.getLon(), lonU = user.getLon();
 
