@@ -1,0 +1,7 @@
+1) Open project in eclipse
+2) Navigate to src folder
+3) Run the master.java file
+4) If you experience an error try adding the cooresponding .jar file to the build path
+    1. Navigate to lib folder
+    2. right click on the .jar file that matches your operating system
+    3. click build path -> add to build path
