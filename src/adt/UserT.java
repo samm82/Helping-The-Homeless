@@ -22,7 +22,7 @@ public class UserT {
 	private double lat, lon;
 
 	/**
-	 * Constructor for new UserT
+	 * Constructor for new UserT (for use with shelter)
 	 * 
 	 * @param type User type
 	 * @param lat  User latitude
@@ -30,6 +30,17 @@ public class UserT {
 	 */
 	public UserT(UserResT type, double lat, double lon) {
 		this.resType = type;
+		this.lat = lat;
+		this.lon = lon;
+	}
+	
+	/**
+	 * Constructor for new UserT (for use with cooling centre).
+	 * 
+	 * @param lat  User latitude
+	 * @param lon  User longitude
+	 */
+	public UserT(double lat, double lon) {
 		this.lat = lat;
 		this.lon = lon;
 	}

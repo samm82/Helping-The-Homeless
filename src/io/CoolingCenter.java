@@ -4,6 +4,14 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import adt.AddressT;
+import adt.CoolingCentreT;
+import adt.UserT;
+import algsstructs.MaxPQ;
+import algsstructs.TST;
+import process.Weight;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -15,6 +23,7 @@ public class CoolingCenter {
 
 	protected Shell shell;
 	private Text address;
+	private String _address_;
 
 	/**
 	 * Launch the application.
@@ -69,7 +78,8 @@ public class CoolingCenter {
 		btnFindNearestCooling.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-		        if(address.getText().equals("")) {
+				_address_ = address.getText();
+		        if(_address_.equals("")) {
 			        MessageBox dialog = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
 					dialog.setText("ERROR");
 					dialog.setMessage("Please enter a valid address");
@@ -79,6 +89,23 @@ public class CoolingCenter {
 					Label lblSearching = new Label(shell, SWT.NONE);
 					lblSearching.setBounds(10, 134, 469, 20);
 					lblSearching.setText("Searching........");
+					
+		    		// creates TST of addresses
+		        	TST<AddressT> addresses = Read.readAddressData();
+					
+					UserT user = new UserT(addresses.get(_address_).getLat(), addresses.get(_address_).getLon());
+					
+					// creates a 1d array of all cooling centres
+					CoolingCentreT[] cool = Read.readCoolingData();
+					
+					for (int i = 0; i < cool.length; i++) {
+						// sets score for each cooling centre
+						cool[i].setScore(Weight.calcScore(cool[i], user));
+					}
+					
+					MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
+					
+					System.out.println(coolPQ.delMax().getName());
 		        }
 			}
 		});

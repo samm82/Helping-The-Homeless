@@ -18,7 +18,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import adt.AddressT;
-//import adt.CoolingCentreT;
 import adt.ShelterT;
 import adt.UserT;
 import adt.UserT.UserResT;
@@ -28,7 +27,6 @@ import process.Weight;
 
 public class FindShelter {
 
-	
 	protected Shell shlUserInfo;
 	private boolean male;
 	private boolean youth;
@@ -176,7 +174,7 @@ public class FindShelter {
 			public void widgetSelected(SelectionEvent e) {
 
 				_address_ = address.getText();
-		        if(address.getText().equals("")) {
+		        if(_address_.equals("")) {
 			        MessageBox dialog = new MessageBox(shlUserInfo, SWT.ICON_ERROR | SWT.OK);
 					dialog.setText("ERROR");
 					dialog.setMessage("Please enter a valid address");
@@ -233,18 +231,6 @@ public class FindShelter {
 						shelPQ = new MaxPQ<ShelterT>(masterArray[0]);
 						break;
 					}
-								
-//					// creates a 1d array of all cooling centres
-//					CoolingCentreT[] cool = Read.readCoolingData();
-//					
-//					for (int i = 0; i < cool.length; i++) {
-//						// sets score for each cooling centre
-//						cool[i].setScore(Weight.calcScore(cool[i], user));
-//					}
-//					
-//					MaxPQ<CoolingCentreT> coolPQ = new MaxPQ<CoolingCentreT>(cool);
-//					
-//					System.out.println(coolPQ.delMax().getName());
 		        	
 			        shlUserInfo.dispose();
 					OutputWindow OutputWindow = new OutputWindow();
