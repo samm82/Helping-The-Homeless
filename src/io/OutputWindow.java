@@ -131,7 +131,7 @@ public class OutputWindow {
 			}
 		});
 		btnOpenShelterIn.setBounds(10, 177, 435, 30);
-		btnOpenShelterIn.setText("Open Shelter In Google Maps");
+		btnOpenShelterIn.setText("Open Location In Google Maps");
 		
 		btnBack = new Button(shell, SWT.NONE);
 		btnBack.addSelectionListener(new SelectionAdapter() {
